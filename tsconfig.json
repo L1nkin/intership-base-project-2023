@@ -2,7 +2,12 @@
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "target": "es5",
-    "lib": ["es6", "dom", "dom.iterable", "esnext"],
+    "lib": [
+      "es6",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,16 +27,30 @@
     "strictNullChecks": true,
     "baseUrl": "src",
     "paths": {
-      "@app/*": ["app/*"],
-      "@entities/*": ["entities/*"],
-      "@features/*": ["features/*"],
-      "@flows/*": ["flows/*"],
-      "@shared/*": ["shared/*"],
-      "@ui/*": ["ui/*"],
+      "@app/*": [
+        "app/*"
+      ],
+      "@entities/*": [
+        "entities/*"
+      ],
+      "@features/*": [
+        "features/*"
+      ],
+      "@flows/*": [
+        "flows/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@ui/*": [
+        "shared/ui/*"
+      ],
     },
     "types": [
       "styled-components-react-native"
     ]
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

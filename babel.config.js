@@ -21,7 +21,7 @@ module.exports = {
           '@features': './src/features',
           '@flows': './src/flows',
           '@shared': './src/shared',
-          '@ui': './src/ui',
+          '@ui': './src/shared/ui',
         },
       },
     ],

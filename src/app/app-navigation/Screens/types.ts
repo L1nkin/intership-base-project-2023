@@ -1,5 +1,6 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { Service } from "@shared/api/types"
 
 export type AppBottomTabParamList = {
     Main: undefined,
@@ -18,15 +19,16 @@ export type ProfileScreenBottomTabProps = BottomTabScreenProps<AppBottomTabParam
 
 
 export type PaymentsStackParamList = {
-    PaymentsList: undefined,
-    MobileNetwork: undefined,
-    HousingCommunalService: undefined,
-    Internet: undefined
+    PaymentsList: { title: string },
+    MobileNetwork: { services?: Service[], title: string },
+    HousingCommunalService: { services?: Service[], title: string },
+    Internet: { services?: Service[], title: string }
 }
 
 export type PaymentsListScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'PaymentsList'>
 export type MobileNetworkScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'MobileNetwork'>
 export type HousingCommunalServiceScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'HousingCommunalService'>
 export type InternetScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'Internet'>
+
 
 

@@ -7,3 +7,4 @@ export { HousingCommunalServiceContainer } from './housing-communal-service-cont
 export { PaymentsListContainer } from './payments-list-container'
 export { PaymentsInternetContainer } from './payments-internet-container'
 export { MobileNetworkContainer } from './mobile-network-container'
+export { ServicesListContainer } from './services-list-container'

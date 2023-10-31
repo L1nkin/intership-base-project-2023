@@ -6,7 +6,7 @@ import { IconBankomat, IconMainProduct, IconPayment, IconUser } from '@shared/ui
 
 import { AppBottomTabParamList } from './Screens/types'
 import { MainScreen } from './Screens/MainScreen'
-import { PaymentsScreen } from './Screens/PaymentsScreen'
+import { PaymentsStack } from './Screens/PaymentsStack'
 import { ATMsScreen } from './Screens/ATMsScreen'
 import { ProfileScreen } from './Screens/ProfileScreen'
 
@@ -51,7 +51,7 @@ export const AppNavigation = () => {
         })}
       >
         <Tab.Screen component={MainScreen} name='Main' options={{ title: 'Главная' }} />
-        <Tab.Screen component={PaymentsScreen} name='Payments' options={{ title: 'Платежи' }} />
+        <Tab.Screen component={PaymentsStack} name='Payments' options={{ title: 'Платежи' }} />
         <Tab.Screen component={ATMsScreen} name='ATMs' options={{ title: 'Банкоматы' }} />
         <Tab.Screen component={ProfileScreen} name='Profile' options={{ title: 'Профиль' }} />
       </Tab.Navigator>

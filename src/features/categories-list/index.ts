@@ -1,1 +1,1 @@
-export { CategoriesFlatList } from './categories-flat-list'
+export { PaymentsFlatList } from './categories-flat-list'

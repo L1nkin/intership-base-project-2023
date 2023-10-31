@@ -1,0 +1,1 @@
+export { MainTabNavigation } from './navigators'

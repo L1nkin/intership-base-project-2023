@@ -36,6 +36,10 @@ export const darkTheme = {
       overlay: '#00000025',
       calendarPeriod: '#6C78E620',
     },
+    bottomBar: {
+      active: '#F678BA',
+      inactive: '#C2C1C6',
+    }
   },
   typography: {
     title: {

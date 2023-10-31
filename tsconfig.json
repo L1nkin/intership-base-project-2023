@@ -39,6 +39,15 @@
       "@flows/*": [
         "flows/*"
       ],
+      "@processes/*": [
+        "processes/*"
+      ],
+      "@widgets/*": [
+        "widgets/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
       "@shared/*": [
         "shared/*"
       ],

@@ -1,5 +1,5 @@
 export { SomeFlowPageConnector } from './some-flow-page-connector'
-export { PaymentsContainer } from './payments-container'
+export { PaymentContainer } from './payment-container'
 export { MainContainer } from './main-container'
 export { ATMsContainer } from './atms-container'
 export { ProfileContainer } from './profile-container'

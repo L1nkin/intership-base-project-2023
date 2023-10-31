@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { styled } from '@ui/theme'
-import { ServicesFlatList } from '@features/categories-list'
+import { CategoriesFlatList } from '@features/categories-list'
 import { PaymentsStackParamList } from '@app/app-navigation/Screens/types'
-import { Service } from '@shared/api/types'
+import { Service, SimpleModel } from '@shared/api/types'
 import { SearchBar } from '@shared/ui/molecules'
 
 const Wrapper = styled.SafeAreaView`
@@ -16,7 +16,7 @@ const Wrapper = styled.SafeAreaView`
 type Props = {
     services: Service[]
 
-    navigateTo(screenName: keyof PaymentsStackParamList): void
+    navigateTo(screenName: keyof PaymentsStackParamList, service: Service): void
 }
 
 const SearchBarWrapper = styled(SearchBar)`
@@ -27,27 +27,40 @@ const SearchBarView = styled.View`
     background-color: ${({ theme }) => theme.palette.background.primary};
 `
 
-const ServicesListWrapper = styled(ServicesFlatList)`
+const ServicesListWrapper = styled(CategoriesFlatList)`
     padding-top: 16px;
 `
 
-export const MobileNetworkContainer = ({ services }: Props) => {
+export const MobileNetworkContainer = ({ services, navigateTo }: Props) => {
     const [query, setQuery] = useState('')
-    const [searchedServices, setSearchedServices] = useState<Service[]>([])
+    const [searchedServices, setSearchedServices] = useState<SimpleModel[]>([])
+
+    const servicesModel = useMemo(() => {
+        return services.map(({ service_id, service_name, service_icon }) => {
+            const simpleModel: SimpleModel = {
+                id: service_id,
+                name: service_name,
+                icon: service_icon
+            }
+            return simpleModel
+        }
+        )
+    }, [services])
 
     useEffect(() => {
         if (query === '') {
-            setSearchedServices(services)
+            setSearchedServices(servicesModel)
         } else {
-            setSearchedServices(services.filter((service) => {
-                return service.service_name.toLowerCase().includes(query.toLowerCase())
+            setSearchedServices(servicesModel.filter((service) => {
+                return service.name.toLowerCase().includes(query.toLowerCase())
             }))
         }
-    }, [query, services])
+    }, [query, servicesModel])
 
     const onPress = useCallback((id: string) => {
-        console.log(id)
-    }, [])
+        const selectedService = services.find((service) => service.service_id === id)
+        navigateTo('Payment', selectedService!)
+    }, [navigateTo, services])
 
     const onChange = useCallback((query: string) => {
         setQuery(query)

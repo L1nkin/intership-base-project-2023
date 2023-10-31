@@ -10,3 +10,9 @@ export type Category = {
     category_icon: string
     services: Service[]
 }
+
+export type SimpleModel = {
+    id: string
+    name: string
+    icon: string
+}

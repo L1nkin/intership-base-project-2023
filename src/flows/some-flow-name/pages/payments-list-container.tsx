@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { styled } from '@ui/theme'
 import { PaymentsStackParamList } from '@app/app-navigation/Screens/types'
 import { CategoriesFlatList } from '@features/categories-list'
-import { Category, Service } from '@shared/api/types'
+import { Category, Service, SimpleModel } from '@shared/api/types'
 import { getCategories } from '@shared/api'
 
 const Wrapper = styled.SafeAreaView`
@@ -24,6 +24,18 @@ type Props = {
 
 export const PaymentsListContainer = ({ navigateTo }: Props) => {
     const [categories, setCategories] = useState<Category[]>([])
+
+    const categoriesModel = useMemo(() => {
+        return categories.map(({ category_id, category_name, category_icon }) => {
+            const simpleModel: SimpleModel = {
+                id: category_id,
+                name: category_name,
+                icon: category_icon
+            }
+            return simpleModel
+        }
+        )
+    }, [categories])
 
     useEffect(() => {
         (async () => {
@@ -56,7 +68,7 @@ export const PaymentsListContainer = ({ navigateTo }: Props) => {
 
     return (
         <Wrapper>
-            <CategoriesFlatListWrapper items={categories} onPress={onPress} />
+            <CategoriesFlatListWrapper items={categoriesModel} onPress={onPress} />
         </Wrapper>
     )
 }

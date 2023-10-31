@@ -1,6 +1,7 @@
 import React from 'react'
 import { Typography } from '@ui/atoms'
 import { styled } from '@ui/theme'
+import { Service } from '@shared/api/types'
 
 const Wrapper = styled.View`
   background: ${({ theme }) => theme.palette.background.primary};
@@ -8,13 +9,17 @@ const Wrapper = styled.View`
   padding: 16px;
 `
 
-export const PaymentsContainer = () => {
+type Props = {
+    service: Service
+}
+
+export const PaymentContainer = ({ service }: Props) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
 
     return (
         <Wrapper>
-            <Typography variant="largeTitle">Payments page!</Typography>
+            <Typography variant="largeTitle">{service.service_name}</Typography>
         </Wrapper>
     )
 }

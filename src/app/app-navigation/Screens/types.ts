@@ -23,12 +23,14 @@ export type PaymentsStackParamList = {
     MobileNetwork: { services?: Service[], title: string },
     HousingCommunalService: { services?: Service[], title: string },
     Internet: { services?: Service[], title: string }
+    Payment: { service: Service }
 }
 
 export type PaymentsListScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'PaymentsList'>
 export type MobileNetworkScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'MobileNetwork'>
 export type HousingCommunalServiceScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'HousingCommunalService'>
 export type InternetScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'Internet'>
+export type PaymentScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'Payment'>
 
 
 

@@ -53,8 +53,10 @@ const getStories = () => {
     "./src/shared/ui/atoms/loader/loader.stories.tsx": require("../src/shared/ui/atoms/loader/loader.stories.tsx"),
     "./src/shared/ui/atoms/typography/typography.stories.tsx": require("../src/shared/ui/atoms/typography/typography.stories.tsx"),
     "./src/shared/ui/icons/icons.stories.tsx": require("../src/shared/ui/icons/icons.stories.tsx"),
+    "./src/shared/ui/molecules/navigation-back-button/navigation-back-button.stories.tsx": require("../src/shared/ui/molecules/navigation-back-button/navigation-back-button.stories.tsx"),
     "./src/shared/ui/molecules/phone-input/phone-input.stories.tsx": require("../src/shared/ui/molecules/phone-input/phone-input.stories.tsx"),
     "./src/shared/ui/molecules/primary-button/primary-button.stories.tsx": require("../src/shared/ui/molecules/primary-button/primary-button.stories.tsx"),
+    "./src/shared/ui/molecules/search-bar/search-bar.stories.tsx": require("../src/shared/ui/molecules/search-bar/search-bar.stories.tsx"),
   };
 };
 

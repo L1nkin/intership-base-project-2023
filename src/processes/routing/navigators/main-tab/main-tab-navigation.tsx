@@ -53,7 +53,9 @@ export const MainTabNavigation = () => {
                     name='Payments'
                     options={{
                         title: 'Платежи',
-                        tabBarIcon: ({ color }) => <IconPayment color={color} />
+                        tabBarIcon: ({ color }) => <IconPayment color={color}
+
+                        />
                     }}
                 />
                 <Tab.Screen

@@ -31,7 +31,7 @@ export const PhoneInput = ({ isLoading = false, isValid = true, ...props }: Prop
     return (
         <Wrapper>
             <IconPhone color={isValid ? '#6C78E6' : '#FB6176'} />
-            <InputText $isValid={isValid} variant='body15Regular' inputProps={{ placeholderTextColor: '#706D76', ...props }} />
+            <InputText $isValid={isValid} variant='body15Regular' placeholderTextColor='#706D76' {...props} />
             {isLoading ? <Loader /> : <View></View>}
         </Wrapper>
     )

@@ -6,7 +6,7 @@ import { PaymentServiceUI } from '@shared/api/payment-categories';
 export const PaymentsListScreen: React.FC<PaymentsListScreenStackProps> = ({ navigation }) => {
     const navigateTo = (screenName: keyof PaymentsStackParamList, title: string, services?: PaymentServiceUI[]) => {
         switch (screenName) {
-            case 'MobileNetwork':
+            case 'ServicesList':
                 navigation.navigate(screenName, { services, title })
                 break;
         }

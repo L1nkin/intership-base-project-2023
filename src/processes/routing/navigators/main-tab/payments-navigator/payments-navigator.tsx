@@ -2,9 +2,9 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { styled } from '@ui/theme'
 import { useTheme } from '@shared/hooks';
-import { NavigationBackButton } from '@shared/ui/molecules/navigation-back-button/navigation-back-button';
+import { NavigationBackButton } from '@ui/molecules';
 import { PaymentsScreenBottomTabProps, PaymentsStackParamList } from '@processes/routing/types';
-import { PaymentsListScreen, MobileNetworkScreen } from '@processes/routing/screens';
+import { PaymentsListScreen, ServicesListScreen } from '@processes/routing/screens';
 import { PaymentScreen } from '@processes/routing/screens/payments-screens';
 
 
@@ -44,7 +44,7 @@ export const PaymentsNavigator: React.FC<PaymentsScreenBottomTabProps> = () => {
                         },
                     }
                 } />
-                <Stack.Screen component={MobileNetworkScreen} name='MobileNetwork' options={
+                <Stack.Screen component={ServicesListScreen} name='ServicesList' options={
                     ({ route }) => ({
                         title: route.params.title,
                     })}

@@ -29,7 +29,7 @@ export const PaymentsListContainer = ({ navigateTo }: Props) => {
 
     const onPress = useCallback((id: string) => {
         const selectedCategories = paymentCategories.find((category) => { return category.id === id })
-        navigateTo('MobileNetwork', selectedCategories?.name, selectedCategories?.services)
+        navigateTo('ServicesList', selectedCategories?.name, selectedCategories?.services)
     }, [navigateTo, paymentCategories])
 
     return (

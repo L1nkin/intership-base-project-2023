@@ -1,10 +1,14 @@
-import React from 'react'
-import { Typography } from '@shared/ui/atoms'
+import React, { useCallback } from 'react'
+import { PaymentOperation } from '@pages/payments/payment-operation'
 
 import { PaymentScreenStackProps } from '../../types'
 
-export const PaymentScreen: React.FC<PaymentScreenStackProps> = ({ route }) => {
+export const PaymentScreen: React.FC<PaymentScreenStackProps> = ({ navigation, route }) => {
+    const goBack = useCallback(() => {
+        navigation.goBack()
+    }, [navigation])
+
     return (
-        <Typography>{route.params.service.name} </Typography>
+        <PaymentOperation service={route.params.service} goBack={goBack} />
     )
 }

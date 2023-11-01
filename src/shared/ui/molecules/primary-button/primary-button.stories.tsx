@@ -3,7 +3,7 @@ import React from 'react'
 import { PrimaryButton } from './primary-button'
 
 const Meta = {
-  title: 'ui/atoms/PrimaryButton',
+  title: 'ui/molecules/PrimaryButton',
 }
 
 export default Meta

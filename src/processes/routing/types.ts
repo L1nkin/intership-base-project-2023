@@ -20,12 +20,12 @@ export type ProfileScreenBottomTabProps = BottomTabScreenProps<AppBottomTabParam
 
 export type PaymentsStackParamList = {
     PaymentsList: { title: string },
-    MobileNetwork: { services?: PaymentServiceUI[], title: string },
+    ServicesList: { services?: PaymentServiceUI[], title: string },
     Payment: { service: PaymentServiceUI }
 }
 
 export type PaymentsListScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'PaymentsList'>
-export type MobileNetworkScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'MobileNetwork'>
+export type ServicesListScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'ServicesList'>
 export type PaymentScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'Payment'>
 
 

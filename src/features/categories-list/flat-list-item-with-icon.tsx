@@ -1,6 +1,6 @@
 import { Typography } from '@shared/ui/atoms'
 import { styled } from '@shared/ui/theme'
-import React, { memo } from 'react'
+import React, { memo, useCallback } from 'react'
 import { Image } from 'react-native'
 
 type Props = {
@@ -13,7 +13,6 @@ type Props = {
 }
 
 const Wrapper = styled.Pressable`
-    flex:1;
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -32,10 +31,12 @@ const IconView = styled.View`
     justify-content: center;
 `
 
-// eslint-disable-next-line react/display-name
-export const FlatListItemWitIcon = memo(({ id, name, icon, onPress }: Props) => {
+export const FlatListItemWitIcon = memo(function FlatListItemWitIcon({ id, name, icon, onPress }: Props) {
+    const onPressItem = useCallback(() => {
+        onPress(id)
+    }, [id, onPress])
     return (
-        <Wrapper onPress={() => onPress(id)}>
+        <Wrapper onPress={onPressItem}>
             <IconView>
                 <Image width={24} height={24} source={{ uri: icon }} />
             </IconView>

@@ -3,7 +3,7 @@ import React from 'react'
 import { PhoneInput } from './phone-input'
 
 const Meta = {
-    title: 'ui/atoms/PhoneInput',
+    title: 'ui/molecules/PhoneInput',
 }
 
 export default Meta

@@ -1,1 +1,1 @@
-export { MobileNetworkContainer } from './ui'
+export { ServicesListContainer } from './ui'

@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import { styled } from '@ui/theme'
 import { PaymentsFlatList } from '@features/categories-list'
 import { PaymentsStackParamList } from '@processes/routing/types'
 import { SearchBar } from '@shared/ui/molecules'
 import { PaymentServiceUI } from '@shared/api/payment-categories'
-import { PaymentsFlatListItem } from '@features/categories-list/types'
 
-import { configFlatListItems } from './lib'
+import { useSearching } from './model'
 
 const Wrapper = styled.SafeAreaView`
   background: ${({ theme }) => theme.palette.background.secondary};
@@ -34,37 +33,13 @@ const ServicesListWrapper = styled(PaymentsFlatList)`
     padding-top: 16px;
 `
 
-export const MobileNetworkContainer = ({ services, navigateTo }: Props) => {
-    const [query, setQuery] = useState('')
-    const [searchedServices, setSearchedServices] = useState<PaymentsFlatListItem[]>([])
-
-    const servicesModel = useMemo(() => {
-        return configFlatListItems(services)
-    }, [services])
-
-    useEffect(() => {
-        if (query === '') {
-            setSearchedServices(servicesModel)
-        } else {
-            setSearchedServices(servicesModel.filter((service) => {
-                return service.name.toLowerCase().includes(query.toLowerCase())
-            }))
-        }
-    }, [query, servicesModel])
-
-    const onPress = useCallback((id: string) => {
-        const selectedService = services.find((service) => service.id === id)
-        navigateTo('Payment', selectedService!)
-    }, [navigateTo, services])
-
-    const onChange = useCallback((query: string) => {
-        setQuery(query)
-    }, [])
+export const ServicesListContainer = ({ services, navigateTo }: Props) => {
+    const { searchedServices, query, onChange, onPress } = useSearching({ services, navigateTo })
 
     return (
         <Wrapper>
             <SearchBarView>
-                <SearchBarWrapper onChange={(e) => onChange(e.nativeEvent.text)} placeholder='search' />
+                <SearchBarWrapper value={query} onChangeText={onChange} placeholder='search' />
             </SearchBarView>
             <ServicesListWrapper isLoading={false} items={searchedServices} onPress={onPress} />
         </Wrapper>

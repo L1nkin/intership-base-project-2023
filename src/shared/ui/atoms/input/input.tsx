@@ -1,11 +1,12 @@
-import { StyleProp, TextInputProps, TextStyle } from 'react-native'
+import { StyleProp, TextStyle } from 'react-native'
 import React from 'react'
 import { styled } from '@ui/theme'
 import { TypographyVariants } from '@ui/theme/types'
+import MaskInput, { MaskInputProps } from 'react-native-mask-input'
 
 type TTypographyAlignment = 'center' | 'left' | 'right'
 
-const InputVariant = styled.TextInput<{
+const InputVariant = styled(MaskInput) <{
     $variant: TypographyVariants
     $align?: TTypographyAlignment
 }>`
@@ -24,16 +25,15 @@ type Props = {
     align?: TTypographyAlignment
     variant?: TypographyVariants
     style?: StyleProp<TextStyle>
-    inputProps?: TextInputProps
 }
 
 export const Input = ({
     variant = 'body20',
     align,
     style,
-    inputProps
-}: Props) => {
+    ...props
+}: Props & MaskInputProps) => {
     return (
-        <InputVariant $align={align} $variant={variant} style={style} {...inputProps} />
+        <InputVariant $align={align} $variant={variant} style={style} {...props} />
     )
 }

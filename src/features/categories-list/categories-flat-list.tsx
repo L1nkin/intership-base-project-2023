@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import { FlatList, StyleProp, ViewStyle } from 'react-native'
+import React, { useCallback } from 'react'
+import { FlatList, ListRenderItemInfo, StyleProp, ViewStyle } from 'react-native'
 
 import { FlatListItemWitIcon } from './flat-list-item-with-icon'
 import { FlatListSeparator } from './flat-list-separator'
@@ -14,7 +14,17 @@ type Props = {
     onPress(id: string): void
 }
 
+const keyExtractor = (item: PaymentsFlatListItem): string => item.id
+
 export const PaymentsFlatList = ({ items, style, isLoading, onPress }: Props) => {
+
+    console.log(items)
+    const renderItem = useCallback(({ item }: ListRenderItemInfo<PaymentsFlatListItem>) => (
+        <FlatListItemWitIcon
+            {...item}
+            onPress={onPress}
+        />
+    ), [onPress])
 
     if (isLoading) {
         return <></>
@@ -24,12 +34,8 @@ export const PaymentsFlatList = ({ items, style, isLoading, onPress }: Props) =>
         <FlatList
             style={style}
             data={items}
-            renderItem={({ item }) =>
-                <FlatListItemWitIcon
-                    {...item}
-                    onPress={onPress}
-                />
-            }
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
             ItemSeparatorComponent={() => <FlatListSeparator />}
         />
     )

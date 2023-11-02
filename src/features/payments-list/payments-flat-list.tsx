@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react'
 import { FlatList, ListRenderItemInfo, StyleProp, ViewStyle } from 'react-native'

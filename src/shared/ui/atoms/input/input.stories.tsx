@@ -14,23 +14,23 @@ const Wrapper = styled.View`
 `
 
 const Meta = {
-    title: 'ui',
+  title: 'ui',
 }
 
 export default Meta
 
 export const Input = () => (
-    <Wrapper>
-        <InputWithPadding variant="title" inputProps={{ placeholder: 'Title 34 bold' }} />
-        <InputWithPadding variant="largeTitle" inputProps={{ placeholder: 'Large title 28 medium' }} />
-        <InputWithPadding variant="subtitle" inputProps={{ placeholder: 'Subtitle 20 semibold' }} />
-        <InputWithPadding variant="body20" inputProps={{ placeholder: 'Body 20 regular' }} />
-        <InputWithPadding variant="body17Medium" inputProps={{ placeholder: 'Body 17 medium' }} />
-        <InputWithPadding variant="body17Regular" inputProps={{ placeholder: 'Body 1 17 regular' }} />
-        <InputWithPadding variant="body15Regular" inputProps={{ placeholder: 'Body 2 15 regular' }} />
-        <InputWithPadding variant="body15Semibold" inputProps={{ placeholder: 'Body 15 semibold' }} />
-        <InputWithPadding variant="caption1" inputProps={{ placeholder: 'Caption 1 13' }} />
-        <InputWithPadding variant="caption2" inputProps={{ placeholder: 'Caption 2 11' }} />
-        <InputWithPadding variant="button" inputProps={{ placeholder: 'Button' }} />
-    </Wrapper>
+  <Wrapper>
+    <InputWithPadding variant="title" placeholder='Title 34 bold' />
+    <InputWithPadding variant="largeTitle" placeholder='Large title 28 medium' />
+    <InputWithPadding variant="subtitle" placeholder='Subtitle 20 semibold' />
+    <InputWithPadding variant="body20" placeholder='Body 20 regular' />
+    <InputWithPadding variant="body17Medium" placeholder='Body 17 medium' />
+    <InputWithPadding variant="body17Regular" placeholder='Body 1 17 regular' />
+    <InputWithPadding variant="body15Regular" placeholder='Body 2 15 regular' />
+    <InputWithPadding variant="body15Semibold" placeholder='Body 15 semibold' />
+    <InputWithPadding variant="caption1" placeholder='Caption 1 13' />
+    <InputWithPadding variant="caption2" placeholder='Caption 2 11' />
+    <InputWithPadding variant="button" placeholder='Button' />
+  </Wrapper>
 )

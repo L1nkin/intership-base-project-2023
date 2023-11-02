@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { styled } from '@shared/ui/theme'
 import React from 'react'
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder'

@@ -3,7 +3,7 @@ import { Typography } from '@ui/atoms'
 import { styled } from '@ui/theme'
 
 const Wrapper = styled.View`
-  background: ${({ theme }) => theme.palette.background.primary};
+  background: ${({ theme }) => theme.palette.background.secondary};
   flex: 1;
   padding: 16px;
   display: flex;

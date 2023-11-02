@@ -11,7 +11,8 @@ const Wrapper = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 8px;
+    padding: 0 8px;
+    height: 46px;
 `
 
 const InputText = styled(Input)`

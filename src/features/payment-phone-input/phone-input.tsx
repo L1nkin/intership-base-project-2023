@@ -12,12 +12,12 @@ const Wrapper = styled.View`
 
 const InputWrapper = styled.View`
     background-color: ${({ theme }) => theme.palette.content.primary};
+    height: 56px;
     border-radius: 26px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: ${({ theme }) => theme.spacing(2)}px
-    ${({ theme }) => theme.spacing(3)}px;
+    padding: 0 ${({ theme }) => theme.spacing(3)}px;
     gap: 16px;
 `
 

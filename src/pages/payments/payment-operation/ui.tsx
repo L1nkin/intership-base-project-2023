@@ -59,6 +59,7 @@ export const PaymentOperation = ({ service, goBack }: Props) => {
                             value={phoneNumber}
                             isValid={isValidNumber}
                             placeholder='Номер телефона'
+                            keyboardType='number-pad'
                             onChangeText={(masked) => onChangePhoneNumber(masked)}
                             pressedClose={pressedClose}
                             onFocus={() => handlePhoneNumberFocus(true)}

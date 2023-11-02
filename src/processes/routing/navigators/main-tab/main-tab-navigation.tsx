@@ -31,7 +31,7 @@ export const MainTabNavigation = () => {
                         backgroundColor: theme.palette.background.primary,
                     },
                     tabBarStyle: {
-                        backgroundColor: theme.palette.background.secondary,
+                        backgroundColor: theme.palette.background.primary,
                         borderTopWidth: 0,
                     },
                     headerTintColor: theme.palette.text.primary,

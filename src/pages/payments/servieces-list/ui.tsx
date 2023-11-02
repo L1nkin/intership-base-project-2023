@@ -12,7 +12,6 @@ const Wrapper = styled.SafeAreaView`
   background: ${({ theme }) => theme.palette.background.secondary};
   flex: 1;
   display: flex;
-  padding: 16px;
 `
 
 type Props = {
@@ -31,6 +30,7 @@ const SearchBarView = styled.View`
 
 const ServicesListWrapper = styled(PaymentsFlatList)`
     padding-top: 16px;
+
 `
 
 export const ServicesListContainer = ({ services, navigateTo }: Props) => {
@@ -39,7 +39,7 @@ export const ServicesListContainer = ({ services, navigateTo }: Props) => {
     return (
         <Wrapper>
             <SearchBarView>
-                <SearchBarWrapper value={query} onChangeText={onChange} placeholder='search' />
+                <SearchBarWrapper value={query} onChangeText={onChange} placeholder='Поиск' />
             </SearchBarView>
             <ServicesListWrapper isLoading={false} items={searchedServices} onPress={onPress} />
         </Wrapper>

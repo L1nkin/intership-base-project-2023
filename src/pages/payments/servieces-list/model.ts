@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { PaymentServiceUI } from "@shared/api/payment-categories"
 import { useMemo, useEffect, useCallback, useState } from "react"
-import { PaymentsFlatListItem } from "@features/categories-list/types"
+import { PaymentsFlatListItem } from "@features/payments-list/types"
 import { PaymentsStackParamList } from "@processes/routing/types"
 
 import { configFlatListItems } from "./lib"

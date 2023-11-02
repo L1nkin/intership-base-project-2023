@@ -1,4 +1,4 @@
-import { PaymentsFlatListItem } from "@features/categories-list/types";
+import { PaymentsFlatListItem } from "@features/payments-list/types";
 import { PaymentServiceUI } from "@shared/api/payment-categories";
 
 export const configFlatListItems = (services: PaymentServiceUI[]): PaymentsFlatListItem[] => {

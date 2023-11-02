@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react'
 import { styled } from '@ui/theme'
 import { PaymentsStackParamList } from '@processes/routing/types'
-import { PaymentsFlatList } from '@features/categories-list'
+import { PaymentsFlatList } from '@features/payments-list'
 import { PaymentServiceUI } from '@shared/api/payment-categories'
 import { usePaymentsCategories } from '@entities/payments-categories'
 

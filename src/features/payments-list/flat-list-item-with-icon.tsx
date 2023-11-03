@@ -8,8 +8,7 @@ type Props = {
     name: string
     icon: string
 
-    // eslint-disable-next-line no-unused-vars
-    onPress(id: string): void
+    onPress: (id: string) => void
 }
 
 const Wrapper = styled.Pressable`

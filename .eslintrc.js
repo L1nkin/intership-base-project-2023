@@ -16,12 +16,13 @@ module.exports = {
   },
   rules: {
     'no-use-before-define': 'error',
-    'no-unused-vars': 'error',
 
     'react-native/no-raw-text': 'off',
     'react-native/no-color-literals': 'off',
     'react-native/no-inline-styles': 'warn',
 
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
     '@typescript-eslint/ban-ts-comment': 'error',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/deprecation': 'off',

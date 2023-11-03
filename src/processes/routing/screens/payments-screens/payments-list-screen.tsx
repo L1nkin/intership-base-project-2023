@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { PaymentsListContainer } from '@pages/payments/payments-list';
-import { PaymentsListScreenStackProps, PaymentsStackParamList } from '@processes/routing/types';
+import { PaymentsListScreenStackProps } from '@processes/routing/types';
 import { PaymentServiceUI } from '@shared/api/payment-categories';
 
 export const PaymentsListScreen: React.FC<PaymentsListScreenStackProps> = ({ navigation }) => {
-    const navigateTo = (screenName: keyof PaymentsStackParamList, title: string, services?: PaymentServiceUI[]) => {
-        switch (screenName) {
-            case 'ServicesList':
-                navigation.navigate(screenName, { services, title })
-                break;
-        }
-    }
+    const navigateTo = useCallback((title: string, services?: PaymentServiceUI[]) => {
+        navigation.navigate('ServicesList', { services, title })
+    }, [navigation])
 
-    return <PaymentsListContainer navigateTo={navigateTo} />
+    return <PaymentsListContainer submit={navigateTo} />
 }
 

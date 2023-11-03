@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { styled } from '@ui/theme'
 import { PaymentsFlatList } from '@features/payments-list'
-import { PaymentsStackParamList } from '@processes/routing/types'
 import { SearchBar } from '@shared/ui/molecules'
 import { PaymentServiceUI } from '@shared/api/payment-categories'
 
@@ -17,7 +15,7 @@ const Wrapper = styled.SafeAreaView`
 type Props = {
     services: PaymentServiceUI[]
 
-    navigateTo(screenName: keyof PaymentsStackParamList, service: PaymentServiceUI): void
+    submit: (service: PaymentServiceUI) => void
 }
 
 const SearchBarWrapper = styled(SearchBar)`
@@ -33,8 +31,8 @@ const ServicesListWrapper = styled(PaymentsFlatList)`
 
 `
 
-export const ServicesListContainer = ({ services, navigateTo }: Props) => {
-    const { searchedServices, query, onChange, onPress } = useSearching({ services, navigateTo })
+export const ServicesListContainer = ({ services, submit }: Props) => {
+    const { searchedServices, query, onChange, onPress } = useSearching({ services, submit })
 
     return (
         <Wrapper>

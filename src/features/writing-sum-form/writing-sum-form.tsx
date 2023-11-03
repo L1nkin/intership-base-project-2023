@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
 import { Input, Typography } from '@shared/ui/atoms'
 import { Chip } from '@shared/ui/atoms/chip/chip'
 import { styled } from '@shared/ui/theme'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { FlatList, NativeSyntheticEvent, TextInputChangeEventData } from 'react-native'
 import { IconRubs24 } from '@shared/ui/icons'
+import { useTheme } from '@shared/hooks'
 
 import { convertToNumber } from './lib'
 
@@ -32,10 +32,9 @@ const ChipItem = styled(Chip)`
 `
 
 const SeparatorLine = styled.View<{
-    $isFocused: boolean,
-    $isValid: boolean
+    color: string
 }>`
-    background-color: ${({ $isFocused, $isValid }) => $isFocused ? '#6C78E6' : ($isValid ? '#403A47' : '#FB6176')};
+    background-color: ${({ color }) => color};
     height: 1px;
     margin: 0 20px;
 `
@@ -59,6 +58,15 @@ export const WritingSumForm = ({ value, onChange }: Props) => {
         const text = e.nativeEvent.text
         onChange(convertToNumber(text))
     }, [onChange])
+    const theme = useTheme()
+
+    const separatorColor = useMemo(() => {
+        const isValid = (value <= 20000 && value > 0)
+        if (focusState) {
+            return theme.palette.indicator.success
+        }
+        return isValid ? theme.palette.content.secondary : theme.palette.indicator.error
+    }, [focusState, theme.palette.content.secondary, theme.palette.indicator.error, theme.palette.indicator.success, value])
 
     return (
         <Wrapper>
@@ -76,7 +84,7 @@ export const WritingSumForm = ({ value, onChange }: Props) => {
                 />
                 <IconRubs24 size={34} color='#fff' />
             </SumInput>
-            <SeparatorLine $isFocused={focusState} $isValid={value <= 20000 && value > 0} />
+            <SeparatorLine color={separatorColor} />
             {
                 value
                     ? <CashBack variant='caption1'>Ваш кэшбэк составит 10%: {value / 10} руб</CashBack>

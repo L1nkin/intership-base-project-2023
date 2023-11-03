@@ -1,7 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-unused-vars */
 import React, { useCallback } from 'react'
-import { FlatList, ListRenderItemInfo, StyleProp, ViewStyle } from 'react-native'
+import { FlatList, ListRenderItemInfo, StyleProp, StyleSheet, ViewStyle } from 'react-native'
 
 import { FlatListItemWitIcon } from './flat-list-item-with-icon'
 import { FlatListSeparator } from './flat-list-separator'
@@ -17,11 +15,15 @@ type Props = {
     onPress(id: string): void
 }
 
+const styles = StyleSheet.create({
+    contentContainerStyle: {
+        flexGrow: 1
+    }
+})
+
 const keyExtractor = (item: PaymentsFlatListItem): string => item.id
 
 export const PaymentsFlatList = ({ items, style, isLoading, onPress }: Props) => {
-
-    console.log(items)
     const renderItem = useCallback(({ item }: ListRenderItemInfo<PaymentsFlatListItem>) => (
         <FlatListItemWitIcon
             {...item}
@@ -39,7 +41,7 @@ export const PaymentsFlatList = ({ items, style, isLoading, onPress }: Props) =>
                 keyExtractor={keyExtractor}
                 ItemSeparatorComponent={() => <FlatListSeparator />}
                 ListEmptyComponent={() => <ListEmptyComponent />}
-                contentContainerStyle={({ flexGrow: 1 })}
+                contentContainerStyle={styles.contentContainerStyle}
             />
     )
 }

@@ -1,6 +1,7 @@
 import React, { TouchableOpacityProps } from 'react-native'
 import { styled } from '@ui/theme'
 import { IconBack } from '@shared/ui/icons'
+import { useTheme } from '@shared/hooks'
 
 const Wrapper = styled.TouchableOpacity`
     display: flex;
@@ -11,9 +12,10 @@ const Wrapper = styled.TouchableOpacity`
 type Props = TouchableOpacityProps
 
 export const NavigationBackButton = ({ ...rest }: Props) => {
+    const theme = useTheme()
     return (
         <Wrapper activeOpacity={0.7} {...rest}>
-            <IconBack color='#fff' />
+            <IconBack color={theme.palette.accent.tertiary} />
         </Wrapper>
     )
 }

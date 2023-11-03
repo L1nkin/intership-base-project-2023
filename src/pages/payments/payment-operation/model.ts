@@ -16,11 +16,8 @@ export const usePhoneNumber = () => {
     }, [])
 
     const handlePhoneNumberFocus = useCallback((isFocus: boolean) => {
-        if (isFocus) {
-            if (phoneNumber.includes(phoneNumberPrefix)) {
-                return
-            }
-            setPhoneNumber((prev) => phoneNumberPrefix + prev)
+        if (isFocus && !phoneNumber.includes(phoneNumberPrefix)) {
+            setPhoneNumber(phoneNumberPrefix)
             return
         }
         if (phoneNumber.trim() === phoneNumberPrefix || phoneNumber.trim().length <= 2) {
@@ -29,7 +26,6 @@ export const usePhoneNumber = () => {
             return
         }
         setIsValidNumber(phoneNumber.length === 16)
-        return
     }, [phoneNumber])
 
     return { phoneNumber, isValidNumber, onChangePhoneNumber, pressedClose, handlePhoneNumberFocus }

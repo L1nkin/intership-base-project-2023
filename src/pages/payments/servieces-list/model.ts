@@ -1,18 +1,16 @@
-/* eslint-disable no-unused-vars */
 import { PaymentServiceUI } from "@shared/api/payment-categories"
 import { useMemo, useEffect, useCallback, useState } from "react"
 import { PaymentsFlatListItem } from "@features/payments-list/types"
-import { PaymentsStackParamList } from "@processes/routing/types"
 
 import { configFlatListItems } from "./lib"
 
 type UseSearchingParams = {
     services: PaymentServiceUI[]
 
-    navigateTo(screenName: keyof PaymentsStackParamList, service: PaymentServiceUI): void
+    submit(service: PaymentServiceUI): void
 }
 
-export const useSearching = ({ services, navigateTo }: UseSearchingParams) => {
+export const useSearching = ({ services, submit }: UseSearchingParams) => {
     const [query, setQuery] = useState('')
     const [searchedServices, setSearchedServices] = useState<PaymentsFlatListItem[]>([])
 
@@ -31,8 +29,8 @@ export const useSearching = ({ services, navigateTo }: UseSearchingParams) => {
 
     const onPress = useCallback((id: string) => {
         const selectedService = services.find((service) => service.id === id)
-        navigateTo('Payment', selectedService!)
-    }, [navigateTo, services])
+        submit(selectedService!)
+    }, [submit, services])
 
     const onChange = useCallback((text: string) => {
         setQuery(text)

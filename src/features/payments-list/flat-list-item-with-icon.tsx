@@ -7,7 +7,6 @@ type Props = {
     id: string
     name: string
     icon: string
-
     onPress: (id: string) => void
 }
 
@@ -39,7 +38,7 @@ export const FlatListItemWitIcon = memo(function FlatListItemWitIcon({ id, name,
             <IconView>
                 <Image width={24} height={24} source={{ uri: icon }} />
             </IconView>
-            <Typography variant='body15Regular'>{name}</Typography>
+            <Typography variant="body15Regular">{name}</Typography>
         </Wrapper>
     )
 })

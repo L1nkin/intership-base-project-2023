@@ -2,8 +2,6 @@ import { PaymentServiceUI } from "@shared/api/payment-categories"
 import { useMemo, useEffect, useCallback, useState } from "react"
 import { PaymentsFlatListItem } from "@features/payments-list/types"
 
-import { configFlatListItems } from "./lib"
-
 type UseSearchingParams = {
     services: PaymentServiceUI[]
 
@@ -15,7 +13,7 @@ export const useSearching = ({ services, submit }: UseSearchingParams) => {
     const [searchedServices, setSearchedServices] = useState<PaymentsFlatListItem[]>([])
 
     const servicesModel = useMemo(() => {
-        return configFlatListItems(services)
+        return [...services]
     }, [services])
 
     useEffect(() => {

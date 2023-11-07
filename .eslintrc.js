@@ -33,17 +33,14 @@ module.exports = {
 
     'import/no-default-export': 'warn',
     'import/order': [
-      'warn',
-      {
-        groups: [
-          'external',
-          'internal',
-          ['parent', 'sibling'],
-          'builtin',
-          'object',
-          'index',
+      'warn', {
+        pathGroups: [
+          {
+            pattern: '@*(shared|entities|features|widgets|pages|processes|app)/**',
+            group: 'internal',
+            position: 'after',
+          },
         ],
-        'newlines-between': 'always',
       },
     ],
   },

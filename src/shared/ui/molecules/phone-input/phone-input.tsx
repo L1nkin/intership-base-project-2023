@@ -32,7 +32,7 @@ export const PhoneInput = ({ isLoading = false, isValid = true, ...props }: Prop
     return (
         <Wrapper>
             <IconPhone color={isValid ? theme.palette.indicator.success : theme.palette.indicator.error} />
-            <InputText $isValid={isValid} variant='body15Regular' placeholderTextColor={theme.palette.text.tertiary} {...props} />
+            <InputText $isValid={isValid} variant="body15Regular" placeholderTextColor={theme.palette.text.tertiary} {...props} />
             {isLoading ? <Loader /> : <View></View>}
         </Wrapper>
     )

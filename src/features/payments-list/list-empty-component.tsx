@@ -16,7 +16,7 @@ const EmptyListStub = styled(Typography)`
 export const ListEmptyComponent = () => {
     return (
         <Wrapper>
-            <EmptyListStub variant='body15Regular' align='center'>По вашему запросу ничего не найдено</EmptyListStub>
+            <EmptyListStub variant="body15Regular" align="center">По вашему запросу ничего не найдено</EmptyListStub>
         </Wrapper>
     )
 }

@@ -48,7 +48,7 @@ export const PhoneInput = ({ icon, isValid = true, pressedClose, ...props }: Pro
                 <Image source={{ uri: icon }} width={24} height={24} />
                 <InputText
                     isValid={isValid}
-                    variant='body15Regular'
+                    variant="body15Regular"
                     placeholderTextColor={theme.palette.text.tertiary}
                     {...props}
                 />

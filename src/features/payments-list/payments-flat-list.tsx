@@ -11,7 +11,6 @@ type Props = {
     items: PaymentsFlatListItem[]
     style?: StyleProp<ViewStyle>
     isLoading: boolean
-
     onPress(id: string): void
 }
 
@@ -31,17 +30,17 @@ export const PaymentsFlatList = ({ items, style, isLoading, onPress }: Props) =>
         />
     ), [onPress])
 
-    return (
-        isLoading
-            ? <SkeletonList style={style} />
-            : <FlatList
-                style={style}
-                data={items}
-                renderItem={renderItem}
-                keyExtractor={keyExtractor}
-                ItemSeparatorComponent={() => <FlatListSeparator />}
-                ListEmptyComponent={() => <ListEmptyComponent />}
-                contentContainerStyle={styles.contentContainerStyle}
-            />
+    if (isLoading) {
+        return <SkeletonList style={style} />
+    }
+    return (<FlatList
+        style={style}
+        data={items}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        ItemSeparatorComponent={() => <FlatListSeparator />}
+        ListEmptyComponent={() => <ListEmptyComponent />}
+        contentContainerStyle={styles.contentContainerStyle}
+    />
     )
 }

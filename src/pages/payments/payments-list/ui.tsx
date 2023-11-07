@@ -4,8 +4,6 @@ import { PaymentsFlatList } from '@features/payments-list'
 import { PaymentServiceUI } from '@shared/api/payment-categories'
 import { usePaymentsCategories } from '@entities/payments-categories'
 
-import { configFlatListItems } from './lib'
-
 const Wrapper = styled.SafeAreaView`
   background: ${({ theme }) => theme.palette.background.secondary};
   flex: 1;
@@ -32,7 +30,7 @@ export const PaymentsListContainer = ({ submit }: Props) => {
 
     return (
         <Wrapper>
-            <CategoriesFlatListWrapper isLoading={isLoading} items={configFlatListItems(paymentCategories)} onPress={onPress} />
+            <CategoriesFlatListWrapper isLoading={isLoading} items={[...paymentCategories]} onPress={onPress} />
         </Wrapper>
     )
 }

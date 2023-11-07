@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { styled } from '@shared/ui/theme'
 import { PaymentServiceUI } from '@shared/api/payment-categories'
 import { PhoneInput } from '@features/payment-phone-input'
 import { WritingSumForm } from '@features/writing-sum-form'
-import { Platform, ScrollView } from 'react-native'
 import { PrimaryButton } from '@shared/ui/molecules'
+import { Platform, ScrollView } from 'react-native'
 import { Mask } from 'react-native-mask-input'
-
 import { CardStub } from './ui/card-stub'
-import { useCheckFields, usePhoneNumber, useSumValue } from './model'
+import { useCheckFields, usePhoneNumber } from './model'
 
 const Wrapper = styled.View`
   background: ${({ theme }) => theme.palette.background.primary};
@@ -34,7 +33,6 @@ const ContinueButton = styled(PrimaryButton)`
 
 type Props = {
     service: PaymentServiceUI
-
     goBack: () => void
 }
 
@@ -42,8 +40,12 @@ const phoneMask: Mask = ['+', '7', ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/,
 
 export const PaymentOperation = ({ service, goBack }: Props) => {
     const { phoneNumber, isValidNumber, onChangePhoneNumber, pressedClose, handlePhoneNumberFocus } = usePhoneNumber()
-    const { sumValue, onChangeSum } = useSumValue()
+    const [sumValue, setSumValue] = useState(0)
     const { continueButtonPressed } = useCheckFields({ phoneNumber, sumValue, goBack })
+
+    const onChangeSum = useCallback((text: number) => {
+        setSumValue(text)
+    }, [])
 
     return (
         <Wrapper>
@@ -58,8 +60,8 @@ export const PaymentOperation = ({ service, goBack }: Props) => {
                             icon={service.icon}
                             value={phoneNumber}
                             isValid={isValidNumber}
-                            placeholder='Номер телефона'
-                            keyboardType='number-pad'
+                            placeholder="Номер телефона"
+                            keyboardType="number-pad"
                             onChangeText={(masked) => onChangePhoneNumber(masked)}
                             pressedClose={pressedClose}
                             onFocus={() => handlePhoneNumberFocus(true)}

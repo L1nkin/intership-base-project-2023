@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 export const SkeletonWrapper = () => {
     return (
         <Wrapper>
-            <SkeletonPlaceholder borderRadius={4} backgroundColor='#403A47' highlightColor='#706D76' speed={3000}>
+            <SkeletonPlaceholder borderRadius={4} backgroundColor="#403A47" highlightColor="#706D76" speed={3000}>
                 <SkeletonPlaceholder.Item flexDirection="row" alignItems="center">
                     <SkeletonPlaceholder.Item width={40} height={40} borderRadius={20} />
                     <SkeletonPlaceholder.Item style={styles.skeletonItem} marginLeft={15}>

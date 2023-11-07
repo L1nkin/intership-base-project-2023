@@ -28,7 +28,7 @@ export const SearchBar = ({ style, ...props }: Props & TextInputProps) => {
     return (
         <Wrapper style={style}>
             <IconSearch />
-            <InputText variant='body15Regular' placeholderTextColor='#706D76' {...props} />
+            <InputText variant="body15Regular" placeholderTextColor="#706D76" {...props} />
         </Wrapper>
     )
 }

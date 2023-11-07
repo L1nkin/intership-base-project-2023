@@ -49,13 +49,3 @@ export const useCheckFields = ({ phoneNumber, sumValue, goBack }: CheckFieldsPar
 
     return { continueButtonPressed }
 }
-
-export const useSumValue = () => {
-    const [sumValue, setSumValue] = useState(0)
-
-    const onChangeSum = useCallback((text: number) => {
-        setSumValue(text)
-    }, [])
-
-    return { sumValue, onChangeSum }
-}

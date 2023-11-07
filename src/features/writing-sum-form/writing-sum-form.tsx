@@ -5,7 +5,6 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { FlatList, NativeSyntheticEvent, TextInputChangeEventData } from 'react-native'
 import { IconRubs24 } from '@shared/ui/icons'
 import { useTheme } from '@shared/hooks'
-
 import { convertToNumber } from './lib'
 
 const Wrapper = styled.View`
@@ -73,16 +72,16 @@ export const WritingSumForm = ({ value, onChange }: Props) => {
             <HeaderTypography>Сумма</HeaderTypography>
             <SumInput>
                 <Input
-                    variant='largeTitle'
-                    value={value ? String(value) : ''}
+                    variant="largeTitle"
+                    value={value ? String(value) : ""}
                     onChange={onChangeSum}
-                    keyboardType='number-pad'
+                    keyboardType="number-pad"
                     placeholder='0'
-                    placeholderTextColor={'#fff'}
+                    placeholderTextColor={"#fff"}
                     onFocus={() => setFocusState(true)}
                     onEndEditing={() => setFocusState(false)}
                 />
-                <IconRubs24 size={34} color='#fff' />
+                <IconRubs24 size={34} color="#fff" />
             </SumInput>
             <SeparatorLine color={separatorColor} />
             {

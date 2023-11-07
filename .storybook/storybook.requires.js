@@ -49,6 +49,7 @@ try {
 const getStories = () => {
   return {
     "./src/entities/some-entity/ui/card/card.stories.tsx": require("../src/entities/some-entity/ui/card/card.stories.tsx"),
+    "./src/shared/ui/atoms/chip/chip.stories.tsx": require("../src/shared/ui/atoms/chip/chip.stories.tsx"),
     "./src/shared/ui/atoms/input/input.stories.tsx": require("../src/shared/ui/atoms/input/input.stories.tsx"),
     "./src/shared/ui/atoms/loader/loader.stories.tsx": require("../src/shared/ui/atoms/loader/loader.stories.tsx"),
     "./src/shared/ui/atoms/typography/typography.stories.tsx": require("../src/shared/ui/atoms/typography/typography.stories.tsx"),

@@ -1,0 +1,1 @@
+export { PaymentsListContainer } from './ui'

@@ -49,9 +49,15 @@ try {
 const getStories = () => {
   return {
     "./src/entities/some-entity/ui/card/card.stories.tsx": require("../src/entities/some-entity/ui/card/card.stories.tsx"),
-    "./src/ui/atoms/typography/typography.stories.tsx": require("../src/ui/atoms/typography/typography.stories.tsx"),
-    "./src/ui/icons/icons.stories.tsx": require("../src/ui/icons/icons.stories.tsx"),
-    "./src/ui/molecules/primary-button/primary-button.stories.tsx": require("../src/ui/molecules/primary-button/primary-button.stories.tsx"),
+    "./src/shared/ui/atoms/chip/chip.stories.tsx": require("../src/shared/ui/atoms/chip/chip.stories.tsx"),
+    "./src/shared/ui/atoms/input/input.stories.tsx": require("../src/shared/ui/atoms/input/input.stories.tsx"),
+    "./src/shared/ui/atoms/loader/loader.stories.tsx": require("../src/shared/ui/atoms/loader/loader.stories.tsx"),
+    "./src/shared/ui/atoms/typography/typography.stories.tsx": require("../src/shared/ui/atoms/typography/typography.stories.tsx"),
+    "./src/shared/ui/icons/icons.stories.tsx": require("../src/shared/ui/icons/icons.stories.tsx"),
+    "./src/shared/ui/molecules/navigation-back-button/navigation-back-button.stories.tsx": require("../src/shared/ui/molecules/navigation-back-button/navigation-back-button.stories.tsx"),
+    "./src/shared/ui/molecules/phone-input/phone-input.stories.tsx": require("../src/shared/ui/molecules/phone-input/phone-input.stories.tsx"),
+    "./src/shared/ui/molecules/primary-button/primary-button.stories.tsx": require("../src/shared/ui/molecules/primary-button/primary-button.stories.tsx"),
+    "./src/shared/ui/molecules/search-bar/search-bar.stories.tsx": require("../src/shared/ui/molecules/search-bar/search-bar.stories.tsx"),
   };
 };
 

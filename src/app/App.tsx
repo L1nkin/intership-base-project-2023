@@ -4,7 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { AppNavigation } from '@app/app-navigation'
 import { AppThemeProvider, styled } from '@ui/theme'
-
+import { SnackBar } from '@entities/snack-bar/ui/snack-bar'
 import { Storybook } from '../../.storybook'
 
 const StorybookButton = styled.TouchableOpacity`
@@ -56,6 +56,7 @@ export const App = () => {
           <SafeAreaProvider>
             <SafeArea>
               <AppNavigation />
+              <SnackBar />
             </SafeArea>
           </SafeAreaProvider>
         </NavigationContainer>

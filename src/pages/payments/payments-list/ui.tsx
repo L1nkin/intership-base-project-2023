@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 import { styled } from '@ui/theme'
 import { PaymentsFlatList } from '@features/payments-list'
-import { PaymentServiceUI } from '@shared/api/payment-categories'
 import { usePaymentsCategories } from '@entities/payments-categories'
 
 const Wrapper = styled.SafeAreaView`
@@ -17,7 +16,7 @@ const CategoriesFlatListWrapper = styled(PaymentsFlatList)`
 `
 
 type Props = {
-    submit: (title: string, services?: PaymentServiceUI[]) => void
+    submit: (title: string, id?: string) => void
 }
 
 export const PaymentsListContainer = ({ submit }: Props) => {
@@ -25,7 +24,7 @@ export const PaymentsListContainer = ({ submit }: Props) => {
 
     const onPress = useCallback((id: string) => {
         const selectedCategories = paymentCategories.find((category) => { return category.id === id })
-        submit(selectedCategories?.name ?? '', selectedCategories?.services)
+        submit(selectedCategories?.name ?? '', selectedCategories?.id)
     }, [submit, paymentCategories])
 
     return (

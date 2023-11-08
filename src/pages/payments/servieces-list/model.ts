@@ -1,32 +1,28 @@
 import { PaymentServiceUI } from "@shared/api/payment-categories"
 import { useMemo, useEffect, useCallback, useState } from "react"
-import { PaymentsFlatListItem } from "@features/payments-list/types"
+import { $servicesStore, getServices, searchServices } from "@entities/payments-categories/model/store"
+import { useStore } from "effector-react"
 
 type UseSearchingParams = {
-    services: PaymentServiceUI[]
-
+    id: string
     submit(service: PaymentServiceUI): void
 }
 
-export const useSearching = ({ services, submit }: UseSearchingParams) => {
+export const useSearching = ({ id, submit }: UseSearchingParams) => {
     const [query, setQuery] = useState('')
-    const [searchedServices, setSearchedServices] = useState<PaymentsFlatListItem[]>([])
+    const services = useStore($servicesStore)
 
     const servicesModel = useMemo(() => {
-        return [...services]
+        return [...services!]
     }, [services])
 
     useEffect(() => {
-        setSearchedServices(query
-            ? servicesModel.filter((service) =>
-                service.name.toLowerCase().includes(query.toLowerCase().trim())
-            )
-            : servicesModel
-        )
-    }, [query, servicesModel])
+        getServices(id)
+        searchServices(query)
+    }, [id, query])
 
     const onPress = useCallback((id: string) => {
-        const selectedService = services.find((service) => service.id === id)
+        const selectedService = services?.find((service) => service.id === id)
         submit(selectedService!)
     }, [submit, services])
 
@@ -34,5 +30,5 @@ export const useSearching = ({ services, submit }: UseSearchingParams) => {
         setQuery(text)
     }, [])
 
-    return { searchedServices, query, onChange, onPress }
+    return { servicesModel, query, onChange, onPress }
 }

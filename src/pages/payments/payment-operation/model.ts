@@ -1,3 +1,4 @@
+import { createSnack } from "@entities/snack-bar"
 import { useCallback, useState } from "react"
 import { Alert } from "react-native"
 
@@ -44,7 +45,8 @@ export const useCheckFields = ({ phoneNumber, sumValue, goBack }: CheckFieldsPar
             Alert.alert('Успех', '', [{ text: "Ок", onPress: (goBack) }])
             return
         }
-        Alert.alert('Проверьте введенные данные')
+        //Alert.alert('Проверьте введенные данные')
+        createSnack({ message: 'Проверьте введенные данные', duration: 2000 })
     }, [goBack, phoneNumber.length, sumValue])
 
     return { continueButtonPressed }

@@ -26,6 +26,8 @@ module.exports = {
           '@flows': './src/flows',
           '@shared': './src/shared',
           '@ui': './src/shared/ui',
+          "^effector$": "effector/compat",
+          "^effector-react$": "effector-react/compat",
         },
       },
     ],

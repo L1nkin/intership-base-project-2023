@@ -1,6 +1,6 @@
 import { PaymentServiceUI } from "@shared/api/payment-categories"
 import { useMemo, useEffect, useCallback, useState } from "react"
-import { $categoriesStore, $servicesStore, searchServices, setupServices } from "@entities/payments-categories/model/store"
+import { $categoriesStore, $servicesStore, searchServices, setupServices } from "@entities/payments-categories"
 import { useStore } from "effector-react"
 
 type UseSearchingParams = {

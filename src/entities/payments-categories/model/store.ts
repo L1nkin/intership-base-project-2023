@@ -4,13 +4,14 @@ import { createStore, createEffect, createEvent } from "effector"
 
 export const $categoriesStore = createStore<PaymentCategoryUI[]>([])
 export const $fetchPaymentCategoriesDate = createStore<number>(0)
+export const $servicesStore = createStore<PaymentServiceUI[]>([])
 
 export const setupPaymentCategoriesRequestDate = createEvent<number>()
-
-$fetchPaymentCategoriesDate.on(setupPaymentCategoriesRequestDate, (state, date) => date)
+export const setupServices = createEvent<PaymentServiceUI[]>()
+export const searchServices = createEvent<string>()
 
 export const fetchPaymentCategoriesFx = createEffect(async () => {
-    if (Date.now() - $fetchPaymentCategoriesDate.getState() >= 86400000) {
+    if (Date.now() - $fetchPaymentCategoriesDate.getState() >= 86400000) { // 86400000 количество миллисекунд в сутках
         const response = await getPaymentCategories()
         if (!response) {
             createSnack({ message: 'Что-то пошло не так', duration: 3000 })
@@ -22,15 +23,8 @@ export const fetchPaymentCategoriesFx = createEffect(async () => {
 })
 
 $categoriesStore.on(fetchPaymentCategoriesFx.doneData, (state, payload) => payload)
-
-export const $servicesStore = createStore<PaymentServiceUI[]>([])
-
-export const setupServices = createEvent<PaymentServiceUI[]>()
-
+$fetchPaymentCategoriesDate.on(setupPaymentCategoriesRequestDate, (state, date) => date)
 $servicesStore.on(setupServices, (_, services) => services)
-
-export const searchServices = createEvent<string>()
-
 $servicesStore.on(searchServices, (state, query) => {
     return query
         ? state = state.filter((service) =>

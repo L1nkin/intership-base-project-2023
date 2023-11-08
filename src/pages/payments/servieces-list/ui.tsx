@@ -4,7 +4,7 @@ import { PaymentsFlatList } from '@features/payments-list'
 import { SearchBar } from '@shared/ui/molecules'
 import { PaymentServiceUI } from '@shared/api/payment-categories'
 
-import { fetchPaymentCategoriesFx, setupPaymentCategoriesRequestDate } from '@entities/payments-categories/model/store'
+import { fetchPaymentCategoriesFx, setupPaymentCategoriesRequestDate } from '@entities/payments-categories'
 import { useStore } from 'effector-react'
 import { useSearching } from './model'
 

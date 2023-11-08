@@ -1,11 +1,10 @@
 import { createEvent, createStore } from "effector";
 import { SnackBarState } from "./models";
 
-export const removeSnack = createEvent()
-
-export const createSnack = createEvent<SnackBarState>()
-
 export const $snackBarStore = createStore<SnackBarState[]>([])
+
+export const removeSnack = createEvent()
+export const createSnack = createEvent<SnackBarState>()
 
 $snackBarStore.on(removeSnack, (state) => state = state.filter((snack, index) => index != 0))
 

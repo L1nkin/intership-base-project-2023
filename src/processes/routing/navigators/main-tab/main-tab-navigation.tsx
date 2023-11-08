@@ -54,7 +54,6 @@ export const MainTabNavigation = () => {
                     options={{
                         title: 'Платежи',
                         tabBarIcon: ({ color }) => <IconPayment color={color}
-
                         />
                     }}
                 />

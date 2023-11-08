@@ -3,24 +3,31 @@ import { PaymentCategoryUI, PaymentServiceUI, getPaymentCategories, mapPaymentCa
 import { createStore, createEffect, createEvent } from "effector"
 
 export const $categoriesStore = createStore<PaymentCategoryUI[]>([])
+export const $fetchPaymentCategoriesDate = createStore<number>(0)
+
+export const setupPaymentCategoriesRequestDate = createEvent<number>()
+
+$fetchPaymentCategoriesDate.on(setupPaymentCategoriesRequestDate, (state, date) => date)
 
 export const fetchPaymentCategoriesFx = createEffect(async () => {
-    const response = await getPaymentCategories()
-    if (!response) {
-        createSnack({ message: 'Что-то пошло не так', duration: 3000 })
-        return
+    if (Date.now() - $fetchPaymentCategoriesDate.getState() >= 86400000) {
+        const response = await getPaymentCategories()
+        if (!response) {
+            createSnack({ message: 'Что-то пошло не так', duration: 3000 })
+            return
+        }
+        setupPaymentCategoriesRequestDate(Date.now())
+        return mapPaymentCategoriesToUI(response).categories
     }
-
-    return mapPaymentCategoriesToUI(response).categories
 })
 
 $categoriesStore.on(fetchPaymentCategoriesFx.doneData, (state, payload) => payload)
 
 export const $servicesStore = createStore<PaymentServiceUI[]>([])
 
-export const getServices = createEvent<string>()
+export const setupServices = createEvent<PaymentServiceUI[]>()
 
-$servicesStore.on(getServices, (state, id) => $categoriesStore.getState().find((category) => category.id = id)?.services)
+$servicesStore.on(setupServices, (_, services) => services)
 
 export const searchServices = createEvent<string>()
 

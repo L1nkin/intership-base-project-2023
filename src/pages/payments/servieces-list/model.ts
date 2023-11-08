@@ -1,6 +1,6 @@
 import { PaymentServiceUI } from "@shared/api/payment-categories"
 import { useMemo, useEffect, useCallback, useState } from "react"
-import { $servicesStore, getServices, searchServices } from "@entities/payments-categories/model/store"
+import { $categoriesStore, $servicesStore, searchServices, setupServices } from "@entities/payments-categories/model/store"
 import { useStore } from "effector-react"
 
 type UseSearchingParams = {
@@ -10,6 +10,7 @@ type UseSearchingParams = {
 
 export const useSearching = ({ id, submit }: UseSearchingParams) => {
     const [query, setQuery] = useState('')
+    const categories = useStore($categoriesStore)
     const services = useStore($servicesStore)
 
     const servicesModel = useMemo(() => {
@@ -17,9 +18,9 @@ export const useSearching = ({ id, submit }: UseSearchingParams) => {
     }, [services])
 
     useEffect(() => {
-        getServices(id)
+        setupServices(categories.find((category) => category.id === id)?.services ?? [])
         searchServices(query)
-    }, [id, query])
+    }, [categories, id, query])
 
     const onPress = useCallback((id: string) => {
         const selectedService = services?.find((service) => service.id === id)

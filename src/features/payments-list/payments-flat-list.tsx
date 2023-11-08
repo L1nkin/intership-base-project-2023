@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { FlatList, ListRenderItemInfo, StyleProp, StyleSheet, ViewStyle } from 'react-native'
+import { FlatList, ListRenderItemInfo, RefreshControl, StyleProp, StyleSheet, ViewStyle } from 'react-native'
 
 import { FlatListItemWitIcon } from './flat-list-item-with-icon'
 import { FlatListSeparator } from './flat-list-separator'
@@ -11,7 +11,9 @@ type Props = {
     items: PaymentsFlatListItem[]
     style?: StyleProp<ViewStyle>
     isLoading: boolean
+    refreshing?: boolean
     onPress(id: string): void
+    refreshControl?: () => void
 }
 
 const styles = StyleSheet.create({
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
 
 const keyExtractor = (item: PaymentsFlatListItem): string => item.id
 
-export const PaymentsFlatList = ({ items, style, isLoading, onPress }: Props) => {
+export const PaymentsFlatList = ({ items, style, isLoading, refreshing, onPress, refreshControl }: Props) => {
     const renderItem = useCallback(({ item }: ListRenderItemInfo<PaymentsFlatListItem>) => (
         <FlatListItemWitIcon
             {...item}
@@ -41,6 +43,10 @@ export const PaymentsFlatList = ({ items, style, isLoading, onPress }: Props) =>
         ItemSeparatorComponent={() => <FlatListSeparator />}
         ListEmptyComponent={() => <ListEmptyComponent />}
         contentContainerStyle={styles.contentContainerStyle}
+        refreshControl={
+            refreshing != undefined
+                ? <RefreshControl tintColor={'#fff'} refreshing={refreshing} onRefresh={refreshControl} />
+                : undefined}
     />
     )
 }

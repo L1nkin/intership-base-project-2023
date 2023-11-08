@@ -31,7 +31,7 @@ const MessageTextView = styled.View`
 
 export const SnackBar = () => {
     const snackBarStore = useStore($snackBarStore)
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const handleTimeout = useRef<NodeJS.Timeout>()
     const theme = useTheme()
 

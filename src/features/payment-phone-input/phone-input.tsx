@@ -2,9 +2,10 @@ import React from 'react';
 import { styled } from '@ui/theme'
 import { IconClose } from '@shared/ui/icons';
 import { Input } from '@shared/ui/atoms/input';
-import { Image } from 'react-native';
+import { Image, TextInput } from 'react-native';
 import { MaskInputProps } from 'react-native-mask-input';
 import { useTheme } from '@shared/hooks';
+import { Ref } from 'react';
 
 const Wrapper = styled.View`
     background-color: ${({ theme }) => theme.palette.background.secondary};
@@ -36,10 +37,11 @@ const PressedCloseIcon = styled.TouchableOpacity`
 type Props = {
     icon: string
     isValid?: boolean
+    innerRef?: Ref<Partial<TextInput>>
     pressedClose: () => void
 }
 
-export const PhoneInput = ({ icon, isValid = true, pressedClose, ...props }: Props & MaskInputProps) => {
+export const PhoneInput = ({ icon, innerRef, isValid = true, pressedClose, ...props }: Props & MaskInputProps) => {
     const theme = useTheme()
 
     return (
@@ -48,9 +50,11 @@ export const PhoneInput = ({ icon, isValid = true, pressedClose, ...props }: Pro
                 <Image source={{ uri: icon }} width={24} height={24} />
                 <InputText
                     isValid={isValid}
+                    innerRef={innerRef}
                     variant="body15Regular"
-                    placeholderTextColor={theme.palette.text.tertiary}
+                    placeholderTextColor={isValid ? theme.palette.text.tertiary : theme.palette.indicator.error}
                     {...props}
+
                 />
                 <PressedCloseIcon activeOpacity={0.7} onPress={pressedClose}>
                     <IconClose color={theme.palette.text.tertiary} />

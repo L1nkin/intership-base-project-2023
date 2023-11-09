@@ -5,8 +5,7 @@ import { Alert } from "react-native"
 const phoneNumberPrefix = '+7'
 
 export const usePhoneNumber = () => {
-    const [phoneNumber, setPhoneNumber] = useState('')//16
-    const [isValidNumber, setIsValidNumber] = useState(true)
+    const [phoneNumber, setPhoneNumber] = useState('')
 
     const onChangePhoneNumber = useCallback((phone: string) => {
         setPhoneNumber(phone)
@@ -23,13 +22,11 @@ export const usePhoneNumber = () => {
         }
         if (phoneNumber.trim() === phoneNumberPrefix || phoneNumber.trim().length <= 2) {
             setPhoneNumber('')
-            setIsValidNumber(true)
             return
         }
-        setIsValidNumber(phoneNumber.length === 16)
     }, [phoneNumber])
 
-    return { phoneNumber, isValidNumber, onChangePhoneNumber, pressedClose, handlePhoneNumberFocus }
+    return { phoneNumber, onChangePhoneNumber, pressedClose, handlePhoneNumberFocus }
 }
 
 type CheckFieldsParams = {
@@ -40,21 +37,33 @@ type CheckFieldsParams = {
 }
 
 export const useCheckFields = ({ phoneNumber, sumValue, goBack }: CheckFieldsParams) => {
-    const isValidNumber = phoneNumber.length === 16
-    const isValidSum = sumValue <= 20000 && sumValue > 0
+    const [isValidNumber, setIsValidNumber] = useState(true)
+    const [isValidSum, setIsValidSum] = useState(true)
+
     const continueButtonPressed = useCallback(() => {
-        if (isValidNumber && isValidSum) {
+        const isValidPhoneNumber = phoneNumber.length === 16
+        const isValidSumValue = sumValue > 0 && sumValue <= 20000
+        setIsValidSum(isValidSumValue)
+        setIsValidNumber(isValidPhoneNumber)
+
+        if (isValidPhoneNumber && isValidSumValue) {
             Alert.alert('Успех', '', [{ text: "Ок", onPress: (goBack) }])
             return
         }
-        if (!isValidNumber) {
+
+        if (phoneNumber.length == 0 && sumValue == 0) {
+            createSnack({ message: 'Поля не могут быть пустыми', duration: 3000 })
+            return
+        }
+
+        if (!isValidPhoneNumber) {
             createSnack({ message: 'Неправильно введен номер', duration: 3000 })
         }
 
-        if (!isValidSum) {
+        if (!isValidSumValue) {
             createSnack({ message: 'Некорректная сумма', duration: 3000 })
         }
-    }, [goBack, isValidNumber, isValidSum])
+    }, [goBack, phoneNumber.length, sumValue])
 
-    return { continueButtonPressed }
+    return { continueButtonPressed, isValidNumber, isValidSum }
 }

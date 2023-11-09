@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { styled } from '@shared/ui/theme'
 import { PaymentServiceUI } from '@shared/api/payment-categories'
 import { PhoneInput } from '@features/payment-phone-input'
 import { WritingSumForm } from '@features/writing-sum-form'
 import { PrimaryButton } from '@shared/ui/molecules'
-import { Platform, ScrollView } from 'react-native'
+import { Platform, ScrollView, TextInput } from 'react-native'
 import { Mask } from 'react-native-mask-input'
 import { CardStub } from './ui/card-stub'
 import { useCheckFields, usePhoneNumber } from './model'
@@ -39,9 +39,11 @@ type Props = {
 const phoneMask: Mask = ['+', '7', ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, '-', /\d/, /\d/]
 
 export const PaymentOperation = ({ service, goBack }: Props) => {
-    const { phoneNumber, isValidNumber, onChangePhoneNumber, pressedClose, handlePhoneNumberFocus } = usePhoneNumber()
+    const { phoneNumber, onChangePhoneNumber, pressedClose, handlePhoneNumberFocus } = usePhoneNumber()
     const [sumValue, setSumValue] = useState(0)
-    const { continueButtonPressed } = useCheckFields({ phoneNumber, sumValue, goBack })
+    const { continueButtonPressed, isValidNumber, isValidSum } = useCheckFields({ phoneNumber, sumValue, goBack })
+    const phoneRef = useRef<Partial<TextInput>>(null)
+    const sumRef = useRef<Partial<TextInput>>(null)
 
     const onChangeSum = useCallback((text: number) => {
         setSumValue(text)
@@ -67,9 +69,16 @@ export const PaymentOperation = ({ service, goBack }: Props) => {
                             onFocus={() => handlePhoneNumberFocus(true)}
                             onEndEditing={() => handlePhoneNumberFocus(false)}
                             mask={phoneMask}
+                            innerRef={phoneRef}
                         />
-                        <WritingSumForm value={sumValue} onChange={onChangeSum} />
-                        <ContinueButton onPress={continueButtonPressed}>Продолжить</ContinueButton>
+                        <WritingSumForm innerRef={sumRef} isValid={isValidSum} value={sumValue} onChange={onChangeSum} />
+                        <ContinueButton onPressIn={() => {
+                            if (phoneRef?.current?.blur && sumRef?.current?.blur) {
+                                phoneRef?.current?.blur()
+                                sumRef?.current?.blur()
+                            }
+                        }}
+                            onPress={continueButtonPressed}>Продолжить</ContinueButton>
                     </ContentWrapper>
                 </ScrollView>
             </KeyboardWrapper >

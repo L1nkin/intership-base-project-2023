@@ -40,14 +40,21 @@ type CheckFieldsParams = {
 }
 
 export const useCheckFields = ({ phoneNumber, sumValue, goBack }: CheckFieldsParams) => {
+    const isValidNumber = phoneNumber.length === 16
+    const isValidSum = sumValue <= 20000 && sumValue > 0
     const continueButtonPressed = useCallback(() => {
-        if (phoneNumber.length === 16 && sumValue <= 20000 && sumValue > 0) {
+        if (isValidNumber && isValidSum) {
             Alert.alert('Успех', '', [{ text: "Ок", onPress: (goBack) }])
             return
         }
-        //Alert.alert('Проверьте введенные данные')
-        createSnack({ message: 'Проверьте введенные данные', duration: 2000 })
-    }, [goBack, phoneNumber.length, sumValue])
+        if (!isValidNumber) {
+            createSnack({ message: 'Неправильно введен номер', duration: 3000 })
+        }
+
+        if (!isValidSum) {
+            createSnack({ message: 'Некорректная сумма', duration: 3000 })
+        }
+    }, [goBack, isValidNumber, isValidSum])
 
     return { continueButtonPressed }
 }

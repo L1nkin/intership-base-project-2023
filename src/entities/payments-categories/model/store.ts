@@ -2,6 +2,7 @@ import { createSnack } from "@entities/snack-bar"
 import { PaymentCategoryUI, PaymentServiceUI, getPaymentCategories, mapPaymentCategoriesToUI } from "@shared/api/payment-categories"
 import { createStore, createEffect, createEvent } from "effector"
 
+const MS_IN_SEC = 86400000
 export const $categoriesStore = createStore<PaymentCategoryUI[]>([])
 export const $fetchPaymentCategoriesDate = createStore<number>(0)
 export const $servicesStore = createStore<PaymentServiceUI[]>([])
@@ -11,7 +12,7 @@ export const setupServices = createEvent<PaymentServiceUI[]>()
 export const searchServices = createEvent<string>()
 
 export const fetchPaymentCategoriesFx = createEffect(async () => {
-    if (Date.now() - $fetchPaymentCategoriesDate.getState() >= 86400000) { // 86400000 количество миллисекунд в сутках
+    if (Date.now() - $fetchPaymentCategoriesDate.getState() >= MS_IN_SEC) {
         const response = await getPaymentCategories()
         if (!response) {
             createSnack({ message: 'Что-то пошло не так', duration: 3000 })

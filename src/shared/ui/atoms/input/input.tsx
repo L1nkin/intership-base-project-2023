@@ -1,12 +1,22 @@
-import { StyleProp, TextStyle } from 'react-native'
-import React from 'react'
+import { StyleProp, TextInput, TextStyle } from 'react-native'
+import React, { Ref, forwardRef, useImperativeHandle, useRef } from 'react'
 import { styled } from '@ui/theme'
 import { TypographyVariants } from '@ui/theme/types'
 import MaskInput, { MaskInputProps } from 'react-native-mask-input'
 
 type TTypographyAlignment = 'center' | 'left' | 'right'
 
-const InputVariant = styled(MaskInput) <{
+export const BaseTextInput = forwardRef(function InputText(props: MaskInputProps, innerRef: Ref<Partial<TextInput>>) {
+    const inputRef = useRef<TextInput>(null);
+    useImperativeHandle(innerRef, () => ({
+        blur: () => {
+            inputRef?.current?.blur();
+        },
+    }));
+    return <MaskInput ref={inputRef} {...props} />
+})
+
+const InputVariant = styled(BaseTextInput) <{
     $variant: TypographyVariants
     $align?: TTypographyAlignment
 }>`
@@ -25,15 +35,17 @@ type Props = {
     align?: TTypographyAlignment
     variant?: TypographyVariants
     style?: StyleProp<TextStyle>
+    innerRef?: Ref<Partial<TextInput>>
 }
 
 export const Input = ({
     variant = 'body20',
     align,
     style,
+    innerRef,
     ...props
 }: Props & MaskInputProps) => {
     return (
-        <InputVariant $align={align} $variant={variant} style={style} {...props} />
+        <InputVariant ref={innerRef} $align={align} $variant={variant} style={style} {...props} />
     )
 }

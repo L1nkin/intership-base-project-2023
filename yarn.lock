@@ -4684,6 +4684,18 @@ ee-first@1.1.1:
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
+effector-react@^22.5.4:
+  version "22.5.4"
+  resolved "https://registry.yarnpkg.com/effector-react/-/effector-react-22.5.4.tgz#356db979e34a0224e439e03de9034a725a3ca4eb"
+  integrity sha512-7HmtfD/vqmqvGnu6jMojmns9cxIW45JPBkGgHrwvbXGpbm0bz2fmVj6PIttv+Bamfmrf9FAy2bZhs+Rwj+3Mxw==
+  dependencies:
+    use-sync-external-store "^1.0.0"
+
+effector@^22.8.7:
+  version "22.8.7"
+  resolved "https://registry.yarnpkg.com/effector/-/effector-22.8.7.tgz#39d00a8fba86645cc093bec49205d549519d0ffa"
+  integrity sha512-vCevjxmFwnZJuRGtqjwfi+sHtu+7gK3qdbv4fxi/AsMdDtoMeoz9C3/28pjNABviZeEARj6ZfAHbNAq5i9d7RQ==
+
 electron-to-chromium@^1.4.477:
   version "1.4.513"
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.513.tgz"

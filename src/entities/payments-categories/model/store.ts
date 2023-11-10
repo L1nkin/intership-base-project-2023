@@ -13,13 +13,17 @@ export const searchServices = createEvent<string>()
 
 export const fetchPaymentCategoriesFx = createEffect(async () => {
     if (Date.now() - $fetchPaymentCategoriesDate.getState() >= MS_IN_SEC) {
-        const response = await getPaymentCategories()
-        if (!response) {
+        try {
+            const response = await getPaymentCategories()
+            if (response) {
+                setupPaymentCategoriesRequestDate(Date.now())
+                return mapPaymentCategoriesToUI(response).categories
+            }
+        } catch (error) {
             createSnack({ message: 'Что-то пошло не так', duration: 3000 })
             return
         }
-        setupPaymentCategoriesRequestDate(Date.now())
-        return mapPaymentCategoriesToUI(response).categories
+
     }
 })
 

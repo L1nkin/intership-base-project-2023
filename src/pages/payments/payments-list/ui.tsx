@@ -12,11 +12,11 @@ const Wrapper = styled.SafeAreaView`
 `
 
 const CategoriesFlatListWrapper = styled(PaymentsFlatList)`
-    top: 20px;
+    padding-top: 20px;
 `
 
 type Props = {
-    submit: (title: string, id?: string) => void
+    submit: (title: string, id: string) => void
 }
 
 export const PaymentsListContainer = ({ submit }: Props) => {
@@ -24,7 +24,9 @@ export const PaymentsListContainer = ({ submit }: Props) => {
 
     const onPress = useCallback((id: string) => {
         const selectedCategories = paymentCategories.find((category) => { return category.id === id })
-        submit(selectedCategories?.name ?? '', selectedCategories?.id)
+        if (selectedCategories) {
+            submit(selectedCategories.name, selectedCategories.id)
+        }
     }, [submit, paymentCategories])
 
     return (

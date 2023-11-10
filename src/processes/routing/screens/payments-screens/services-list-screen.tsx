@@ -8,6 +8,6 @@ export const ServicesListScreen: React.FC<ServicesListScreenStackProps> = ({ nav
         navigation.navigate('Payment', { service })
     }, [navigation])
 
-    return <ServicesListContainer id={route.params.id!} submit={navigateTo} />
+    return <ServicesListContainer id={route.params.id} submit={navigateTo} />
 }
 

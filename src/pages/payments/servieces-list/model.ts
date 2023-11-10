@@ -14,7 +14,7 @@ export const useSearching = ({ id, submit }: UseSearchingParams) => {
     const services = useStore($servicesStore)
 
     const servicesModel = useMemo(() => {
-        return [...services!]
+        return [...services]
     }, [services])
 
     useEffect(() => {

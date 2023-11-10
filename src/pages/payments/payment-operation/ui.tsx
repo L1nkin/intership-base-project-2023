@@ -49,6 +49,13 @@ export const PaymentOperation = ({ service, goBack }: Props) => {
         setSumValue(text)
     }, [])
 
+    const onPressIn = useCallback(() => {
+        if (phoneRef?.current?.blur && sumRef?.current?.blur) {
+            phoneRef?.current?.blur()
+            sumRef?.current?.blur()
+        }
+    }, [])
+
     return (
         <Wrapper>
             <KeyboardWrapper
@@ -72,12 +79,7 @@ export const PaymentOperation = ({ service, goBack }: Props) => {
                             innerRef={phoneRef}
                         />
                         <WritingSumForm innerRef={sumRef} isValid={isValidSum} value={sumValue} onChange={onChangeSum} />
-                        <ContinueButton onPressIn={() => {
-                            if (phoneRef?.current?.blur && sumRef?.current?.blur) {
-                                phoneRef?.current?.blur()
-                                sumRef?.current?.blur()
-                            }
-                        }}
+                        <ContinueButton onPressIn={onPressIn}
                             onPress={continueButtonPressed}>Продолжить</ContinueButton>
                     </ContentWrapper>
                 </ScrollView>

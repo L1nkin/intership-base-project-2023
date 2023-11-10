@@ -20,7 +20,7 @@ export type ProfileScreenBottomTabProps = BottomTabScreenProps<AppBottomTabParam
 
 export type PaymentsStackParamList = {
     PaymentsList: { title: string },
-    ServicesList: { id?: string, title: string },
+    ServicesList: { id: string, title: string },
     Payment: { service: PaymentServiceUI }
 }
 

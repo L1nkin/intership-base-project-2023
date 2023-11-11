@@ -8,6 +8,7 @@ import { PaymentsListScreen, ServicesListScreen } from '@processes/routing/scree
 import { PaymentScreen } from '@processes/routing/screens/payments-screens';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { Platform } from 'react-native';
+import { SuccessOfOperationScreen } from '@processes/routing/screens/payments-screens/succes-of-operation-screen';
 
 
 const Stack = createNativeStackNavigator<PaymentsStackParamList>()
@@ -18,7 +19,7 @@ const Wrapper = styled.View`
   padding-bottom: 4px;
 `
 
-const tabHiddenRoutes = ["ServicesList", "Payment"];
+const tabHiddenRoutes = ["ServicesList", "Payment", "SuccessOfOperation"];
 
 export const PaymentsNavigator: React.FC<PaymentsScreenBottomTabProps> = ({ navigation, route }) => {
     const theme = useTheme()
@@ -80,6 +81,11 @@ export const PaymentsNavigator: React.FC<PaymentsScreenBottomTabProps> = ({ navi
                         title: route.params.service.name,
                     })}
                 />
+                <Stack.Screen component={SuccessOfOperationScreen} name='SuccessOfOperation' options={
+                    {
+                        headerShown: false
+                    }
+                } />
             </Stack.Navigator>
         </Wrapper>
     )

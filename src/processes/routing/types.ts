@@ -19,14 +19,16 @@ export type ProfileScreenBottomTabProps = BottomTabScreenProps<AppBottomTabParam
 
 
 export type PaymentsStackParamList = {
-    PaymentsList: { title: string },
+    PaymentsList: undefined,
     ServicesList: { id: string, title: string },
     Payment: { service: PaymentServiceUI }
+    SuccessOfOperation: { success: boolean, sum: number }
 }
 
 export type PaymentsListScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'PaymentsList'>
 export type ServicesListScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'ServicesList'>
 export type PaymentScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'Payment'>
+export type SuccessOfOperationScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'SuccessOfOperation'>
 
 
 

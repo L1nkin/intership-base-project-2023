@@ -15,13 +15,13 @@ export const useSearching = ({ id, submit }: UseSearchingParams) => {
 
 
     const servicesModel = useMemo(() => {
-        return [...services]
-    }, [services])
+        const searchedServices = services.filter(service => service.name.toLowerCase().includes(query.toLowerCase().trim()))
+        return [...searchedServices]
+    }, [query, services])
 
     useEffect(() => {
         if (data) {
             const currentServices = mapPaymentCategoriesToUI(data).categories.find(category => category.id === id)?.services ?? []
-            console.log(currentServices)
             setServices(currentServices)
         }
         if (isError) {

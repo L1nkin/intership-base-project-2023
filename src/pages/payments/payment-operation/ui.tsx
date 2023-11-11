@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { styled } from '@shared/ui/theme'
 import { PaymentServiceUI, getPaymentServiceInfo } from '@shared/api/payments'
 import { PhoneInput } from '@features/payment-phone-input'
@@ -47,17 +47,14 @@ export const PaymentOperation = ({ service, navigateTo }: Props) => {
         continueButtonPressed,
         isValidNumber,
         isValidSum,
-    } = useCheckFields({ phoneNumber, sumValue, additionalData: data!, navigateTo })
+    } = useCheckFields({ phoneNumber, sumValue, additionalData: data, navigateTo })
+
     const phoneRef = useRef<Partial<TextInput>>(null)
     const sumRef = useRef<Partial<TextInput>>(null)
 
     const onChangeSum = useCallback((text: number) => {
         setSumValue(text)
     }, [])
-
-    useEffect(() => {
-        console.log(data)
-    }, [data])
 
     const onPressIn = useCallback(() => {
         if (phoneRef?.current?.blur && sumRef?.current?.blur) {

@@ -46,6 +46,8 @@ const TopCircle = styled.View<{
 
 const SumView = styled.View`
     margin-top: 20px;
+    display: flex;
+    align-items: center;
     gap: 10px;
 `
 

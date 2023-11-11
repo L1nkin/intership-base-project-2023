@@ -1,7 +1,7 @@
 import axios from "axios"
 
 import { api } from "@shared/config"
-import { HistoryRequestBody, PaymentCategoriesAPI, PaymentServiceInfo } from "./types"
+import { HistoryRequestBody, PaymentCategoriesAPI, PaymentServiceInfo, PostRequestStatus } from "./types"
 
 export const getPaymentCategories = async (): Promise<PaymentCategoriesAPI | undefined> => {
     const response = await axios.get<PaymentCategoriesAPI>("https://github.com/kode-frontend/files/raw/main/categories.json")
@@ -13,12 +13,12 @@ export const getPaymentList = async () => {
     return response.data
 }
 
-export const getPaymentServiceInfo = async (service_id: string) => {
+export const getPaymentServiceInfo = async (service_id: string): Promise<PaymentServiceInfo> => {
     const response = await api.get<PaymentServiceInfo>(`api/core/payment/${service_id}`)
     return response.data
 }
 
-export const postPaymentOperation = async (body: HistoryRequestBody) => {
+export const postPaymentOperation = async (body: HistoryRequestBody): Promise<PostRequestStatus> => {
     const response = await api.post('api/core/history', body)
     return response.data
 }

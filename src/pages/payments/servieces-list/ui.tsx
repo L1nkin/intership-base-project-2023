@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { styled } from '@ui/theme'
 import { PaymentsFlatList } from '@features/payments-list'
 import { SearchBar } from '@shared/ui/molecules'
-import { PaymentServiceUI } from '@shared/api/payment-categories'
+import { PaymentServiceUI } from '@shared/api/payments'
 
 import { fetchPaymentCategoriesFx, setupPaymentCategoriesRequestDate } from '@entities/payments-categories'
 import { useStore } from 'effector-react'

@@ -1,4 +1,4 @@
-import { PaymentServiceUI, getPaymentList, mapPaymentCategoriesToUI } from "@shared/api/payment-categories"
+import { PaymentServiceUI, getPaymentList, mapPaymentCategoriesToUI } from "@shared/api/payments"
 import { useMemo, useEffect, useCallback, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { createSnack } from "@entities/snack-bar"

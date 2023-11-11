@@ -1,6 +1,6 @@
 import { createSnack } from "@entities/snack-bar"
-import { postPaymentOperation } from "@shared/api/payment-categories"
-import { PaymentServiceInfo } from "@shared/api/payment-categories/types"
+import { postPaymentOperation } from "@shared/api/payments"
+import { PaymentServiceInfo } from "@shared/api/payments/types"
 import { useCallback, useState } from "react"
 
 const phoneNumberPrefix = '+7'
@@ -54,7 +54,7 @@ export const useCheckFields = ({ phoneNumber, additionalData, sumValue, navigate
                 size: sumValue,
                 period_from: "",
                 period_to: ""
-            }).then(res => res.success && (navigateTo(true, sumValue))).catch(error => console.log(error))
+            }).then(res => (navigateTo(res.success, sumValue))).catch(() => navigateTo(false, sumValue))
             return
         }
 

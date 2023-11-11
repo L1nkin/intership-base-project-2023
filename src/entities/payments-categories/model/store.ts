@@ -1,5 +1,5 @@
 import { createSnack } from "@entities/snack-bar"
-import { PaymentCategoryUI, getPaymentCategories, mapPaymentCategoriesToUI } from "@shared/api/payment-categories"
+import { PaymentCategoryUI, getPaymentCategories, mapPaymentCategoriesToUI } from "@shared/api/payments"
 import { createStore, createEffect, createEvent } from "effector"
 
 const MS_IN_SEC = 86400000

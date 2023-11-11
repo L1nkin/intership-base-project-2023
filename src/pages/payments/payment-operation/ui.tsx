@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { styled } from '@shared/ui/theme'
-import { PaymentServiceUI, getPaymentServiceInfo } from '@shared/api/payment-categories'
+import { PaymentServiceUI, getPaymentServiceInfo } from '@shared/api/payments'
 import { PhoneInput } from '@features/payment-phone-input'
 import { WritingSumForm } from '@features/writing-sum-form'
 import { PrimaryButton } from '@shared/ui/molecules'

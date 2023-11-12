@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { AppNavigation } from '@app/app-navigation'
 import { AppThemeProvider, styled } from '@ui/theme'
 import { SnackBar } from '@entities/snack-bar/ui/snack-bar'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Storybook } from '../../.storybook'
 
 const StorybookButton = styled.TouchableOpacity`
@@ -21,6 +22,8 @@ const StorybookButtonText = styled.Text`
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
 `
+
+const queryClient = new QueryClient()
 
 export const App = () => {
   const [isStorybookVisible, setIsStorybookVisible] = React.useState(false)
@@ -52,14 +55,16 @@ export const App = () => {
   return (
     <StrictMode>
       <AppThemeProvider>
-        <NavigationContainer>
-          <SafeAreaProvider>
-            <SafeArea>
-              <AppNavigation />
-              <SnackBar />
-            </SafeArea>
-          </SafeAreaProvider>
-        </NavigationContainer>
+        <QueryClientProvider client={queryClient}>
+          <NavigationContainer>
+            <SafeAreaProvider>
+              <SafeArea>
+                <AppNavigation />
+                <SnackBar />
+              </SafeArea>
+            </SafeAreaProvider>
+          </NavigationContainer>
+        </QueryClientProvider>
       </AppThemeProvider>
     </StrictMode>
   )

@@ -1,7 +1,7 @@
-import { PaymentServiceUI } from "@shared/api/payment-categories"
+import { PaymentServiceUI, getPaymentList, mapPaymentCategoriesToUI } from "@shared/api/payments"
 import { useMemo, useEffect, useCallback, useState } from "react"
-import { $categoriesStore, $servicesStore, searchServices, setupServices } from "@entities/payments-categories"
-import { useStore } from "effector-react"
+import { useQuery } from "@tanstack/react-query"
+import { createSnack } from "@entities/snack-bar"
 
 type UseSearchingParams = {
     id: string
@@ -10,17 +10,24 @@ type UseSearchingParams = {
 
 export const useSearching = ({ id, submit }: UseSearchingParams) => {
     const [query, setQuery] = useState('')
-    const categories = useStore($categoriesStore)
-    const services = useStore($servicesStore)
+    const { data, isLoading, isPending, isError } = useQuery({ queryKey: ['category'], queryFn: getPaymentList })
+    const [services, setServices] = useState<PaymentServiceUI[]>([])
+
 
     const servicesModel = useMemo(() => {
-        return [...services]
-    }, [services])
+        const searchedServices = services.filter(service => service.name.toLowerCase().includes(query.toLowerCase().trim()))
+        return [...searchedServices]
+    }, [query, services])
 
     useEffect(() => {
-        setupServices(categories.find((category) => category.id === id)?.services ?? [])
-        searchServices(query)
-    }, [categories, id, query])
+        if (data) {
+            const currentServices = mapPaymentCategoriesToUI(data).categories.find(category => category.id === id)?.services ?? []
+            setServices(currentServices)
+        }
+        if (isError) {
+            createSnack({ message: "Что-то пошло не так", duration: 3000 })
+        }
+    }, [data, id, isError, query])
 
     const onPress = useCallback((id: string) => {
         const selectedService = services?.find((service) => service.id === id)
@@ -31,5 +38,5 @@ export const useSearching = ({ id, submit }: UseSearchingParams) => {
         setQuery(text)
     }, [])
 
-    return { servicesModel, query, onChange, onPress }
+    return { servicesModel, isLoading, isPending, query, onChange, onPress }
 }

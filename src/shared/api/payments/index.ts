@@ -1,4 +1,4 @@
-export { getPaymentCategories } from './model'
+export { getPaymentCategories, getPaymentList, getPaymentServiceInfo, postPaymentOperation } from './model'
 export {
     type PaymentCategoriesAPI,
     type PaymentCategoriesUI,

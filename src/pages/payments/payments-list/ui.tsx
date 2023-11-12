@@ -21,7 +21,6 @@ type Props = {
 
 export const PaymentsListContainer = ({ submit }: Props) => {
     const { paymentCategories, isLoading } = usePaymentsCategories()
-
     const onPress = useCallback((id: string) => {
         const selectedCategories = paymentCategories.find((category) => { return category.id === id })
         if (selectedCategories) {

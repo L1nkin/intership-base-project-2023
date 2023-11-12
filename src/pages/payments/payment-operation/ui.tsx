@@ -1,11 +1,12 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { styled } from '@shared/ui/theme'
-import { PaymentServiceUI } from '@shared/api/payment-categories'
+import { PaymentServiceUI, getPaymentServiceInfo } from '@shared/api/payments'
 import { PhoneInput } from '@features/payment-phone-input'
 import { WritingSumForm } from '@features/writing-sum-form'
 import { PrimaryButton } from '@shared/ui/molecules'
 import { Platform, ScrollView, TextInput } from 'react-native'
 import { Mask } from 'react-native-mask-input'
+import { useQuery } from '@tanstack/react-query'
 import { CardStub } from './ui/card-stub'
 import { useCheckFields, usePhoneNumber } from './model'
 
@@ -33,15 +34,21 @@ const ContinueButton = styled(PrimaryButton)`
 
 type Props = {
     service: PaymentServiceUI
-    goBack: () => void
+    navigateTo: (success: boolean, sum: number) => void
 }
 
 const phoneMask: Mask = ['+', '7', ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, '-', /\d/, /\d/]
 
-export const PaymentOperation = ({ service, goBack }: Props) => {
+export const PaymentOperation = ({ service, navigateTo }: Props) => {
+    const { data } = useQuery({ queryKey: ['service_info'], queryFn: () => getPaymentServiceInfo(service.id) })
     const { phoneNumber, onChangePhoneNumber, pressedClose, handlePhoneNumberFocus } = usePhoneNumber()
     const [sumValue, setSumValue] = useState(0)
-    const { continueButtonPressed, isValidNumber, isValidSum } = useCheckFields({ phoneNumber, sumValue, goBack })
+    const {
+        continueButtonPressed,
+        isValidNumber,
+        isValidSum,
+    } = useCheckFields({ phoneNumber, sumValue, additionalData: data, navigateTo })
+
     const phoneRef = useRef<Partial<TextInput>>(null)
     const sumRef = useRef<Partial<TextInput>>(null)
 

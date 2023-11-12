@@ -1,6 +1,8 @@
 import { createSnack } from "@entities/snack-bar"
+import { postPaymentOperation } from "@shared/api/payments"
+import { PaymentServiceInfo } from "@shared/api/payments/types"
+import { useMutation } from "@tanstack/react-query"
 import { useCallback, useState } from "react"
-import { Alert } from "react-native"
 
 const phoneNumberPrefix = '+7'
 
@@ -32,13 +34,14 @@ export const usePhoneNumber = () => {
 type CheckFieldsParams = {
     phoneNumber: string
     sumValue: number
-
-    goBack: () => void
+    additionalData?: PaymentServiceInfo
+    navigateTo: (success: boolean, sum: number) => void
 }
 
-export const useCheckFields = ({ phoneNumber, sumValue, goBack }: CheckFieldsParams) => {
+export const useCheckFields = ({ phoneNumber, additionalData, sumValue, navigateTo }: CheckFieldsParams) => {
     const [isValidNumber, setIsValidNumber] = useState(true)
     const [isValidSum, setIsValidSum] = useState(true)
+    const { mutate } = useMutation({ mutationFn: postPaymentOperation });
 
     const continueButtonPressed = useCallback(() => {
         const isValidPhoneNumber = phoneNumber.length === 16
@@ -47,8 +50,20 @@ export const useCheckFields = ({ phoneNumber, sumValue, goBack }: CheckFieldsPar
         setIsValidNumber(isValidPhoneNumber)
 
         if (isValidPhoneNumber && isValidSumValue) {
-            Alert.alert('Успех', '', [{ text: "Ок", onPress: (goBack) }])
-            return
+            mutate({
+                card_id: 0,
+                service_id: `${additionalData?.service_id}`,
+                size: sumValue,
+                period_from: "",
+                period_to: ""
+            }, {
+                onSuccess: (data) => {
+                    navigateTo(data.success, sumValue)
+                },
+                onError: () => {
+                    navigateTo(false, sumValue)
+                }
+            })
         }
 
         if (phoneNumber.length == 0 && sumValue == 0) {
@@ -63,7 +78,7 @@ export const useCheckFields = ({ phoneNumber, sumValue, goBack }: CheckFieldsPar
         if (!isValidSumValue) {
             createSnack({ message: 'Некорректная сумма', duration: 3000 })
         }
-    }, [goBack, phoneNumber.length, sumValue])
+    }, [additionalData, navigateTo, mutate, phoneNumber.length, sumValue])
 
     return { continueButtonPressed, isValidNumber, isValidSum }
 }

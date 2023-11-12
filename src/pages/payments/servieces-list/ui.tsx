@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { styled } from '@ui/theme'
 import { PaymentsFlatList } from '@features/payments-list'
 import { SearchBar } from '@shared/ui/molecules'
-import { PaymentServiceUI } from '@shared/api/payment-categories'
+import { PaymentServiceUI } from '@shared/api/payments'
 
 import { fetchPaymentCategoriesFx, setupPaymentCategoriesRequestDate } from '@entities/payments-categories'
 import { useStore } from 'effector-react'
@@ -33,8 +33,9 @@ const ServicesListWrapper = styled(PaymentsFlatList)`
 `
 
 export const ServicesListContainer = ({ id, submit }: Props) => {
-    const { servicesModel, query, onChange, onPress } = useSearching({ id, submit })
+    const { servicesModel, isLoading, query, onChange, onPress } = useSearching({ id, submit })
     const refreshing = useStore<boolean>(fetchPaymentCategoriesFx.pending)
+
 
     const onRefresh = useCallback(() => {
         setupPaymentCategoriesRequestDate(0)
@@ -46,7 +47,7 @@ export const ServicesListContainer = ({ id, submit }: Props) => {
             <SearchBarView>
                 <SearchBarWrapper value={query} onChangeText={onChange} placeholder='Поиск' />
             </SearchBarView>
-            <ServicesListWrapper refreshControl={onRefresh} isLoading={false} refreshing={refreshing} items={servicesModel} onPress={onPress} />
+            <ServicesListWrapper refreshControl={onRefresh} isLoading={isLoading} refreshing={refreshing} items={servicesModel} onPress={onPress} />
         </Wrapper>
     )
 }

@@ -30,5 +30,18 @@ export type ServicesListScreenStackProps = NativeStackScreenProps<PaymentsStackP
 export type PaymentScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'Payment'>
 export type SuccessOfOperationScreenStackProps = NativeStackScreenProps<PaymentsStackParamList, 'SuccessOfOperation'>
 
+export type AuthStackParamList = {
+    PhoneNumber: undefined,
+    OTPCode: undefined,
+    Password: undefined,
+    ErrorScreen: undefined,
+    SuccessScreen: undefined
+}
+
+export type PhoneNumberScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'PhoneNumber'>
+export type OTPCodeScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'OTPCode'>
+export type PasswordScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'Password'>
+export type ErrorScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'ErrorScreen'>
+export type SuccessScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'SuccessScreen'>
 
 

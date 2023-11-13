@@ -6,7 +6,11 @@ export const PhoneNumberScreen: React.FC<PhoneNumberScreenStackProps> = ({ navig
     const navigateNext = useCallback(() => {
         navigation.navigate('OTPCode')
     }, [navigation])
+
+    const navigateToError = useCallback(() => {
+        navigation.navigate('ErrorScreen')
+    }, [navigation])
     return (
-        <AuthPhoneNumberWriting navigateNext={navigateNext} />
+        <AuthPhoneNumberWriting navigateNext={navigateNext} navigateToError={navigateToError} />
     )
 }

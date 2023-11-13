@@ -39,9 +39,10 @@ const phoneMask: Mask = ['+', '7', ' ', '(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /
 
 type Props = {
   navigateNext: () => void
+  navigateToError: () => void
 }
 
-export const AuthPhoneNumberWriting = ({ navigateNext }: Props) => {
+export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props) => {
   const { phoneNumber, isValidNumber, serverPhone, setIsValidNumber, onChangePhoneNumber, handlePhoneNumberFocus } = usePhoneNumber()
   const phoneRef = useRef<Partial<TextInput>>(null)
   const { translateButtonStyle, translatePhoneViewStyle } = useAnimation()
@@ -53,20 +54,23 @@ export const AuthPhoneNumberWriting = ({ navigateNext }: Props) => {
     }
   }, [])
 
-
   const onPress = useCallback(() => {
     if (phoneNumber.length === 18) {
       (
         async () => {
-          await getOtpCodeFx(`+7${serverPhone}`)
-          navigateNext()
+          try {
+            await getOtpCodeFx(`+7${serverPhone}`)
+            navigateNext()
+          } catch (error) {
+            navigateToError()
+          }
         }
       )()
       return
     }
     setIsValidNumber(false)
     createSnack({ message: 'Пожалуйста, убедитесь, что вы правильно ввели номер телефона', duration: 3000 })
-  }, [navigateNext, phoneNumber.length, serverPhone, setIsValidNumber])
+  }, [navigateNext, navigateToError, phoneNumber.length, serverPhone, setIsValidNumber])
 
   return (
     <Wrapper>

@@ -12,6 +12,9 @@ export const BaseTextInput = forwardRef(function InputText(props: MaskInputProps
         blur: () => {
             inputRef?.current?.blur();
         },
+        focus: () => {
+            inputRef?.current?.focus()
+        },
     }));
     return <MaskInput ref={inputRef} {...props} />
 })

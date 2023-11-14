@@ -1,4 +1,4 @@
-import { $otpStore } from '@entities/auth/model/store';
+import { $otpStore, $phoneNumberStore, getOtpCodeFx } from '@entities/auth/model/store';
 import { KeyboardTemplate } from '@features/keyboard-template/keyboard-template';
 import { TKeyboardButton, TKeyboardButtonType } from '@features/keyboard-template/types';
 import { OTPInput } from '@features/pin-input';
@@ -45,6 +45,7 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
   const [sendingTryCount, setSendingTryCount] = useState(0)
   const validOtpCode = useStore($otpStore)
   const maximumCodeLength = 4;
+  const phoneNumberStore = useStore($phoneNumberStore)
 
   useEffect(() => {
     if (otpCode.length === maximumCodeLength) {
@@ -77,8 +78,15 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
       case 'remove':
         setOTPCode((prev) => prev.slice(0, -1))
         break;
+      case 'timer':
+        try {
+          getOtpCodeFx(phoneNumberStore)
+        } catch {
+          navigateToError()
+        }
+
     }
-  }, [otpCode.length])
+  }, [otpCode.length, phoneNumberStore])
 
   return (
     <Wrapper>

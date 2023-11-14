@@ -6,7 +6,7 @@ import React, { useCallback, useRef } from 'react';
 import { Mask } from 'react-native-mask-input';
 import Animated from 'react-native-reanimated';
 import { TextInput } from 'react-native';
-import { getOtpCodeFx } from '@entities/auth/model/store';
+import { getOtpCodeFx, savePhone } from '@entities/auth/model/store';
 import { useStore } from 'effector-react';
 import { useAnimation, usePhoneNumber } from './model';
 
@@ -59,6 +59,7 @@ export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props)
       (
         async () => {
           try {
+            savePhone(`+7${serverPhone}`)
             await getOtpCodeFx(`+7${serverPhone}`)
             navigateNext()
           } catch (error) {

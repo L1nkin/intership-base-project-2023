@@ -1,8 +1,8 @@
 import { styled } from '@shared/ui/theme';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Typography } from '@shared/ui/atoms';
-import { calculateEndTimer, calculateTimeLeft, convertSeconds } from './lib';
-import { TKeyButtonPressed, TimerInfo } from './types';
+import { calculateEndTimer, calculateTimeLeft, convertSeconds } from '../../../../features/keyboard-template/lib';
+import { TimerInfo } from '../../../../features/keyboard-template/types';
 
 const TimerWrapper = styled.View`
     display: flex;
@@ -15,7 +15,7 @@ const TimerLabel = styled(Typography)`
 `
 
 type Props = {
-    onKeyPress: TKeyButtonPressed
+    onKeyPress: () => void
 }
 
 const TouchWrapper = styled.TouchableOpacity`
@@ -46,7 +46,7 @@ export const TimerView = ({ onKeyPress }: Props) => {
         setTimeLeft(timerInitial)
         setIsEnded(false)
         timeEnd.current = calculateEndTimer()
-        onKeyPress('timer')
+        onKeyPress()
     }, [onKeyPress])
 
 

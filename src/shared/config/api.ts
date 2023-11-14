@@ -4,7 +4,7 @@ import axios from "axios"
 export const authApi = axios.create({
     baseURL: "https://stoplight.io/mocks/kode-education/kode-bank/27774162/",
     headers: {
-        'Accept': 'application/json',
+        Accept: "application/json",
     }
 })
 
@@ -17,6 +17,16 @@ export const api = axios.create({
     },
 });
 
+export type EnterResponse = {
+    accessToken: string
+    refreshToken: string
+}
+
+export const refreshToken = async (): Promise<EnterResponse> => {
+    const response = await authApi.post('api/auth/refresh', { refreshToken: getFromStorage('refreshToken') })
+    return response.data
+}
+
 api.interceptors.request.use(
     (config) => {
         const token = getFromStorage("accessToken");
@@ -27,16 +37,6 @@ api.interceptors.request.use(
     },
     (error) => Promise.reject(error)
 );
-
-export type EnterResponse = {
-    accessToken: string
-    refreshToken: string
-}
-
-export const refreshToken = async (): Promise<EnterResponse> => {
-    const response = await authApi.post('api/auth/refresh', { refreshToken: getFromStorage('refreshToken') })
-    return response.data
-}
 
 api.interceptors.response.use(
     (response) => response,

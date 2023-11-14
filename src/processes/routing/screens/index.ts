@@ -14,6 +14,5 @@ export {
     OTPCodeScreen,
     PasswordScreen,
     ErrorServerScreen,
-    LoadingScreen,
     SuccessAuthScreen
 } from './auth-screens'

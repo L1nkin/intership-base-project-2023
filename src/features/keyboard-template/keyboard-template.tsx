@@ -4,10 +4,9 @@ import { Typography } from '@shared/ui/atoms';
 import { IconDelete } from '@shared/ui/icons';
 import { useTheme } from '@shared/hooks';
 import { TKeyButtonPressed, TKeyboardButton, TKeyboardButtonType, } from './types';
-import { TimerView } from './timer-view';
 
 type Props = {
-    valueList: TKeyboardButton[][]
+    leftBottomView: JSX.Element
     onKeyPressed: TKeyButtonPressed
 }
 
@@ -37,10 +36,18 @@ const ElementKey = styled.TouchableOpacity`
 type ElementKeyViewProps = {
     type: TKeyboardButtonType
     value?: number
+    leftBottomView: JSX.Element
     onPressKey: TKeyButtonPressed
 }
 
-const ElementKeyView = ({ type, value, onPressKey }: ElementKeyViewProps) => {
+const valueListMock: TKeyboardButton[][] = [
+    [{ type: 'number', value: 1 }, { type: 'number', value: 2 }, { type: 'number', value: 3 }],
+    [{ type: 'number', value: 4 }, { type: 'number', value: 5 }, { type: 'number', value: 6 }],
+    [{ type: 'number', value: 7 }, { type: 'number', value: 8 }, { type: 'number', value: 9 }],
+    [{ type: 'view' }, { type: 'number', value: 0 }, { type: 'remove' }]
+]
+
+const ElementKeyView = ({ type, value, leftBottomView, onPressKey }: ElementKeyViewProps) => {
     const theme = useTheme()
 
     switch (type) {
@@ -54,20 +61,20 @@ const ElementKeyView = ({ type, value, onPressKey }: ElementKeyViewProps) => {
                 <IconDelete color={theme.palette.text.primary} />
             </ElementKey>
 
-        case 'timer':
-            return <ElementKey activeOpacity={1}><TimerView onKeyPress={onPressKey} /></ElementKey>
+        case 'view':
+            return <ElementKey activeOpacity={1}>{leftBottomView}</ElementKey>
     }
 }
 
-export const KeyboardTemplate = ({ valueList, onKeyPressed }: Props) => {
+export const KeyboardTemplate = ({ leftBottomView, onKeyPressed }: Props) => {
 
     return (
         <StyledSeparatedElements>
-            {valueList.map((row, index) => {
+            {valueListMock.map((row, index) => {
                 return (
                     <ElementsRow key={index}>
                         {row.map((element, elemIndex) => {
-                            return <ElementKeyView key={elemIndex} {...element} onPressKey={onKeyPressed} />
+                            return <ElementKeyView key={elemIndex} {...element} leftBottomView={leftBottomView} onPressKey={onKeyPressed} />
                         })}
                     </ElementsRow>
                 )

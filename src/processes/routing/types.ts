@@ -36,7 +36,6 @@ export type AuthStackParamList = {
     Password: undefined,
     ErrorScreen: undefined,
     SuccessScreen: undefined,
-    LoadingScreen: undefined
 }
 
 export type PhoneNumberScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'PhoneNumber'>
@@ -44,6 +43,5 @@ export type OTPCodeScreenStackProps = NativeStackScreenProps<AuthStackParamList,
 export type PasswordScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'Password'>
 export type ErrorScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'ErrorScreen'>
 export type SuccessScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'SuccessScreen'>
-export type LoadingScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'LoadingScreen'>
 
 

@@ -1,1 +1,1 @@
-export { storageAdapter } from './storage-adapter'
+export { storageAdapter, storage, getFromStorage, saveInStorage } from './storage-adapter'

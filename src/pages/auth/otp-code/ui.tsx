@@ -1,7 +1,8 @@
-import { $otpStore, $phoneNumberStore, getGuestToken, getOtpCodeFx } from '@entities/auth/model/store';
+import { $otpStore, $phoneNumberStore, getOtpCodeFx } from '@entities/auth/model/store';
 import { KeyboardTemplate } from '@features/keyboard-template/keyboard-template';
 import { TKeyboardButton, TKeyboardButtonType } from '@features/keyboard-template/types';
 import { OTPInput } from '@features/pin-input';
+import { getGuestTokenFx } from '@shared/api/auth';
 import { Loader, Typography } from '@shared/ui/atoms';
 import { styled } from '@shared/ui/theme';
 import { useStore } from 'effector-react';
@@ -55,7 +56,7 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
   const validOtpCode = useStore($otpStore)
   const maximumCodeLength = 4;
   const phoneNumberStore = useStore($phoneNumberStore)
-  const isLoading = useStore(getGuestToken.pending)
+  const isLoading = useStore(getGuestTokenFx.pending)
 
   const invalidOtp = useCallback(() => {
     setIsValidCode(false)
@@ -68,7 +69,7 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
         (
           async () => {
             try {
-              await getGuestToken({ otpCode: validOtpCode.otpCode, otpId: validOtpCode.otpId, phone: phoneNumberStore })
+              await getGuestTokenFx({ otpCode: validOtpCode.otpCode, otpId: validOtpCode.otpId, phone: phoneNumberStore })
               navigateNext()
             } catch {
               navigateToError()

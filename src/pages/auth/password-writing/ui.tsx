@@ -7,7 +7,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import Animated from 'react-native-reanimated';
 import { createSnack } from '@entities/snack-bar';
 import { TextInput } from 'react-native';
-import { $guestTokenStore, getTokensFx } from '@entities/auth/model/store';
+import { $guestTokenStore, getTokensFx } from '@shared/api/auth';
 import { useStore } from 'effector-react';
 import { isValidPassword } from './lib';
 import { useAnimation } from './model';

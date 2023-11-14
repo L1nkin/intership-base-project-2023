@@ -23,3 +23,7 @@ export type EnterResponse = {
     accessToken: string
     refreshToken: string
 }
+
+export type RefreshTokenResponse = {
+    refreshToken: string
+}

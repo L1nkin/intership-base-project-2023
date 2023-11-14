@@ -34,9 +34,12 @@ export const AuthNavigator = () => {
                 headerShadowVisible: false,
             }}>
                 <Stack.Screen component={PhoneNumberScreen} name='PhoneNumber' />
-                <Stack.Screen component={OTPCodeScreen} name='OTPCode' />
+                <Stack.Screen component={OTPCodeScreen} name='OTPCode' options={{
+                    gestureEnabled: false
+                }} />
                 <Stack.Screen component={LoadingScreen} name='LoadingScreen' />
                 <Stack.Screen component={PasswordScreen} name='Password' options={({ navigation }) => ({
+                    gestureEnabled: false,
                     headerShown: true,
                     headerTitle: '',
                     headerLeft() {

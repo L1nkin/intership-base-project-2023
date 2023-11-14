@@ -4703,12 +4703,22 @@ ee-first@1.1.1:
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
+effector-localstorage@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/effector-localstorage/-/effector-localstorage-1.0.0.tgz#4a999d88447e070ff98f620c56734926dd518966"
+  integrity sha512-SyJiKCHv05GPcWAC/lupQJWvp2EwY2QRfMuiy/JmuXxw++WUi5ozvxKrPT9ntRndn3AgD3S+LOPPwl7GWi/rzw==
+
 effector-react@^22.5.4:
   version "22.5.4"
   resolved "https://registry.yarnpkg.com/effector-react/-/effector-react-22.5.4.tgz#356db979e34a0224e439e03de9034a725a3ca4eb"
   integrity sha512-7HmtfD/vqmqvGnu6jMojmns9cxIW45JPBkGgHrwvbXGpbm0bz2fmVj6PIttv+Bamfmrf9FAy2bZhs+Rwj+3Mxw==
   dependencies:
     use-sync-external-store "^1.0.0"
+
+effector-storage@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/effector-storage/-/effector-storage-6.1.1.tgz#82448fa33626d62ae550de4577cd0948066fa642"
+  integrity sha512-xSzat/P7v8PTF9NQcoN6fmPD7gTJhPyp5+T1EaDKSfokseq7WG0cv4t05gYNF6RF6hWY2OCEo3gD/V9KlhmyZQ==
 
 effector@^22.8.7:
   version "22.8.7"
@@ -9039,6 +9049,11 @@ react-native-mask-input@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-mask-input/-/react-native-mask-input-1.2.3.tgz#c588b145bb48098be54ac6b40ebe7363a302428b"
   integrity sha512-RWx+gc1EaBslJWR6dsvGdILJ5XvnvZuyEsgJaH9uAMukB3Z9eOlxra1E7Ovck8NSMVcYWpBB/lzojO4LwqqXgA==
+
+react-native-mmkv@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/react-native-mmkv/-/react-native-mmkv-2.11.0.tgz#51b9985f6a5c09fe9c16d8c1861cc2901856ace1"
+  integrity sha512-28PdUHjZJmAw3q+8zJDAAdohnZMpDC7WgRUJxACOMkcmJeqS3u5cKS/lSq2bhf1CvaeIiHYHUWiyatUjMRCDQQ==
 
 react-native-modal-datetime-picker@^14.0.0:
   version "14.0.1"

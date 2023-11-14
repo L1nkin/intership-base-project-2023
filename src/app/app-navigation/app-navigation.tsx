@@ -4,9 +4,9 @@ import { AuthNavigator } from '@processes/routing/navigators'
 
 
 export const AppNavigation = () => {
-  const isAuth = true
+  const isAuth = false
 
-  if (isAuth) {
+  if (!isAuth) {
     return <AuthNavigator />
   }
 

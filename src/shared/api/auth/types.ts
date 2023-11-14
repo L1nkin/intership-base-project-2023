@@ -13,3 +13,13 @@ export type ConfirmBody = {
 export type GuestToken = {
     guestToken: string
 }
+
+export type EnterBody = {
+    guestToken: string
+    password: string
+}
+
+export type EnterResponse = {
+    accessToken: string
+    refreshToken: string
+}

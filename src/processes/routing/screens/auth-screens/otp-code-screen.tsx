@@ -4,7 +4,7 @@ import { OTPCodeScreenStackProps } from '../../types'
 
 export const OTPCodeScreen: React.FC<OTPCodeScreenStackProps> = ({ navigation }) => {
     const navigateNext = useCallback(() => {
-        navigation.navigate('LoadingScreen')
+        navigation.navigate('Password')
     }, [navigation])
 
     const navigateToError = useCallback(() => {

@@ -1,8 +1,8 @@
-import { $otpStore, $phoneNumberStore, getOtpCodeFx } from '@entities/auth/model/store';
+import { $otpStore, $phoneNumberStore, getGuestToken, getOtpCodeFx } from '@entities/auth/model/store';
 import { KeyboardTemplate } from '@features/keyboard-template/keyboard-template';
 import { TKeyboardButton, TKeyboardButtonType } from '@features/keyboard-template/types';
 import { OTPInput } from '@features/pin-input';
-import { Typography } from '@shared/ui/atoms';
+import { Loader, Typography } from '@shared/ui/atoms';
 import { styled } from '@shared/ui/theme';
 import { useStore } from 'effector-react';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -15,6 +15,15 @@ const Wrapper = styled.View`
   display: flex;
   padding-top: 40%;
   gap: 20px;
+  align-items: center;
+`
+
+const LoaderWrapper = styled.View`
+  background: ${({ theme }) => theme.palette.background.primary};
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
   align-items: center;
 `
 
@@ -46,11 +55,27 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
   const validOtpCode = useStore($otpStore)
   const maximumCodeLength = 4;
   const phoneNumberStore = useStore($phoneNumberStore)
+  const isLoading = useStore(getGuestToken.pending)
+
+  const invalidOtp = useCallback(() => {
+    setIsValidCode(false)
+    setSendingTryCount((prev) => prev + 1)
+  }, [])
 
   useEffect(() => {
     if (otpCode.length === maximumCodeLength) {
-      if (otpCode === validOtpCode) {
-        navigateNext()
+      if (otpCode === validOtpCode.otpCode) {
+        (
+          async () => {
+            try {
+              await getGuestToken({ otpCode: validOtpCode.otpCode, otpId: validOtpCode.otpId, phone: phoneNumberStore })
+              navigateNext()
+            } catch {
+              navigateToError()
+              invalidOtp()
+            }
+          }
+        )()
         return
       }
       if (sendingTryCount === 5) {
@@ -62,13 +87,13 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
         )
         return
       }
-      setIsValidCode(false)
-      setSendingTryCount((prev) => prev + 1)
+      invalidOtp()
       return
     }
     setIsValidCode(true)
-
   }, [navigateNext, navigateToError, navigateToStart, otpCode, validOtpCode])
+
+
 
   const onKeyPressed = useCallback((type: TKeyboardButtonType, value?: number) => {
     switch (type) {
@@ -86,7 +111,13 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
         }
 
     }
-  }, [otpCode.length, phoneNumberStore])
+  }, [navigateToError, otpCode.length, phoneNumberStore])
+
+  if (isLoading) {
+    return <LoaderWrapper>
+      <Loader iconProps={{ color: '#fff' }} />
+    </LoaderWrapper>
+  }
 
   return (
     <Wrapper>

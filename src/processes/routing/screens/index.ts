@@ -6,3 +6,13 @@ export { MainScreen } from './main-screens'
 // Payments screens
 export { ServicesListScreen } from './payments-screens'
 export { PaymentsListScreen } from './payments-screens'
+
+// Auth screens
+
+export {
+    PhoneNumberScreen,
+    OTPCodeScreen,
+    PasswordScreen,
+    ErrorServerScreen,
+    SuccessAuthScreen
+} from './auth-screens'

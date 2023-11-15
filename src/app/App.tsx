@@ -53,19 +53,17 @@ export const App = () => {
   }
 
   return (
-    <StrictMode>
-      <AppThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <NavigationContainer>
-            <SafeAreaProvider>
-              <SafeArea>
-                <AppNavigation />
-                <SnackBar />
-              </SafeArea>
-            </SafeAreaProvider>
-          </NavigationContainer>
-        </QueryClientProvider>
-      </AppThemeProvider>
-    </StrictMode>
+    <AppThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <NavigationContainer>
+          <SafeAreaProvider>
+            <SafeArea>
+              <AppNavigation />
+              <SnackBar />
+            </SafeArea>
+          </SafeAreaProvider>
+        </NavigationContainer>
+      </QueryClientProvider>
+    </AppThemeProvider>
   )
 }

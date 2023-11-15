@@ -1,6 +1,6 @@
 import { PasswordInput } from '@features/password-input';
 import { Typography } from '@shared/ui/atoms';
-import { IconLogoMedium } from '@shared/ui/icons';
+import { IconLogoSmall } from '@shared/ui/icons';
 import { PrimaryButton } from '@shared/ui/molecules';
 import { styled } from '@shared/ui/theme';
 import React, { useCallback, useRef, useState } from 'react';
@@ -74,7 +74,7 @@ export const AuthPasswordWriting = ({ navigateToError, navigateNext }: Props) =>
 
   return (
     <Wrapper>
-      <IconLogoMedium />
+      <IconLogoSmall />
       <InputLabelWrapper style={translatePasswordViewStyle}>
         <Typography variant='body15Regular'>Введите пароль</Typography>
         <PasswordInput innerRef={inputRef} value={password} onChangeText={setPassword} />

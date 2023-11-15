@@ -10,7 +10,7 @@ import { TextInput } from 'react-native';
 import { $guestTokenStore, getTokensFx } from '@shared/api/auth';
 import { useStore } from 'effector-react';
 import { isValidPassword } from './lib';
-import { useAnimation } from './model';
+import { useKeyboardAnimation } from './hooks';
 
 const Wrapper = styled.View`
   background: ${({ theme }) => theme.palette.background.primary};
@@ -42,10 +42,10 @@ type Props = {
 export const AuthPasswordWriting = ({ navigateToError, navigateNext }: Props) => {
   const [password, setPassword] = useState('')
   const guestToken = useStore($guestTokenStore)
-  const { translateButtonStyle, translatePasswordViewStyle } = useAnimation()
+  const { translateButtonStyle, translatePasswordViewStyle } = useKeyboardAnimation()
   const inputRef = useRef<Partial<TextInput>>(null)
 
-  const onPress = useCallback(() => {
+  const onPress = useCallback(async () => {
     if (password.length < 5) {
       createSnack({ message: 'Длина пароля должна быть не менее 5 символов', duration: 3000 })
       return
@@ -54,16 +54,12 @@ export const AuthPasswordWriting = ({ navigateToError, navigateNext }: Props) =>
       createSnack({ message: 'Пароль может содержать только цифры и буквы', duration: 3000 })
       return
     }
-    (
-      async () => {
-        try {
-          await getTokensFx({ guestToken, password })
-          navigateNext()
-        } catch {
-          navigateToError()
-        }
-      }
-    )()
+    try {
+      await getTokensFx({ guestToken, password })
+      navigateNext()
+    } catch {
+      navigateToError()
+    }
   }, [guestToken, navigateNext, navigateToError, password])
 
   const onPressIn = useCallback(() => {
@@ -76,7 +72,7 @@ export const AuthPasswordWriting = ({ navigateToError, navigateNext }: Props) =>
     <Wrapper>
       <IconLogoSmall />
       <InputLabelWrapper style={translatePasswordViewStyle}>
-        <Typography variant='body15Regular'>Введите пароль</Typography>
+        <Typography variant="body15Regular">Введите пароль</Typography>
         <PasswordInput innerRef={inputRef} value={password} onChangeText={setPassword} />
       </InputLabelWrapper>
       <AnimatedButton style={translateButtonStyle}>

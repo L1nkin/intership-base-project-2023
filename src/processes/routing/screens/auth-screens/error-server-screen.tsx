@@ -4,6 +4,6 @@ import { ErrorScreenStackProps } from '../../types'
 
 export const ErrorServerScreen: React.FC<ErrorScreenStackProps> = ({ navigation }) => {
     return (
-        <ErrorServer goBack={() => navigation.goBack()} />
+        <ErrorServer goBack={navigation.goBack} />
     )
 }

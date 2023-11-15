@@ -1,6 +1,6 @@
 import { Input, Typography } from '@shared/ui/atoms';
 import { styled } from '@shared/ui/theme';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 const OTPInputContainer = styled.View`
  justify-content: center;
@@ -69,7 +69,7 @@ type Props = {
 export const OTPInput = ({ code, isValid, maximumLength, setCode }: Props) => {
     const boxArray = new Array(maximumLength).fill(0);
 
-    const boxDigit = (_: number, index: number) => {
+    const boxDigit = useCallback((_: number, index: number) => {
         const emptyInput = "";
         const digit = code[index] || emptyInput;
 
@@ -81,19 +81,19 @@ export const OTPInput = ({ code, isValid, maximumLength, setCode }: Props) => {
 
         return (
             <BoxWithSeparateView key={index}>
-                {index === 2 ? <SeparateLine isValid={isValid} variant='largeTitle'>-</SeparateLine> : undefined}
+                {index === 2 ? <SeparateLine isValid={isValid} variant="largeTitle">-</SeparateLine> : undefined}
                 <SplitBoxes >
                     <SplitBoxText isValid={isValid}>{digit}</SplitBoxText>
                     {isValueFocused && !isCodeComplete ? <FocusedLine /> : undefined}
                 </SplitBoxes>
             </BoxWithSeparateView>
         );
-    };
+    }, [code, isValid, maximumLength]);
 
     return (
         <OTPInputContainer>
             <SplitOTPBoxesContainer>{boxArray.map(boxDigit)}</SplitOTPBoxesContainer>
-            <TextInputHidden value={code} onChangeText={setCode} keyboardType='number-pad' maxLength={maximumLength} />
+            <TextInputHidden value={code} onChangeText={setCode} keyboardType="number-pad" maxLength={maximumLength} />
         </OTPInputContainer>
     )
 }

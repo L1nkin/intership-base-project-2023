@@ -1,0 +1,1 @@
+export { KeyboardTemplate } from './keyboard-template'

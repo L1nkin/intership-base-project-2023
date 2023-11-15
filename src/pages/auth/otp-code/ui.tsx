@@ -1,6 +1,6 @@
 import { $otpStore, $phoneNumberStore, getOtpCodeFx } from '@entities/auth/model/store';
-import { KeyboardTemplate } from '@features/keyboard-template/keyboard-template';
-import { TKeyboardButtonType } from '@features/keyboard-template/types';
+import { KeyboardTemplate } from '@shared/ui/templates/';
+import { TKeyboardButtonType } from '@shared/ui/templates/keyboard-template/types';
 import { OTPInput } from '@features/pin-input';
 import { getGuestTokenFx } from '@shared/api/auth';
 import { Loader, Typography } from '@shared/ui/atoms';
@@ -8,7 +8,7 @@ import { styled } from '@shared/ui/theme';
 import { useStore } from 'effector-react';
 import React, { useCallback } from 'react';
 import { TimerView } from './ui/timer-view';
-import { useOtpCode } from './model';
+import { useOtpCode } from './hooks';
 
 const Wrapper = styled.View`
   background: ${({ theme }) => theme.palette.background.primary};
@@ -88,14 +88,14 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
 
   return (
     <Wrapper>
-      <InfoLabel variant='body15Regular' align='center'>На ваш номер отправлено SMS с кодом подтверждения.</InfoLabel>
+      <InfoLabel variant="body15Regular" align="center">На ваш номер отправлено SMS с кодом подтверждения.</InfoLabel>
       <OTPInput
         code={otpCode}
         isValid={isValidCode}
         setCode={setOTPCode}
         maximumLength={maximumCodeLength}
       />
-      {isValidCode ? undefined : <ErrorTryCountLabel align='center' variant='caption2'>Неверный код. Осталось {6 - sendingTryCount} попытки</ErrorTryCountLabel>}
+      {isValidCode ? undefined : <ErrorTryCountLabel align="center" variant="caption2">Неверный код. Осталось {6 - sendingTryCount} попытки</ErrorTryCountLabel>}
       <KeyboardTemplate onKeyPressed={onKeyPressed} leftBottomView={<TimerView onKeyPress={onTimerPressed} />} />
     </Wrapper>
   )

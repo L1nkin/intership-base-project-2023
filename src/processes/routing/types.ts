@@ -38,10 +38,13 @@ export type AuthStackParamList = {
     SuccessScreen: undefined,
 }
 
-export type PhoneNumberScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'PhoneNumber'>
-export type OTPCodeScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'OTPCode'>
-export type PasswordScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'Password'>
-export type ErrorScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'ErrorScreen'>
-export type SuccessScreenStackProps = NativeStackScreenProps<AuthStackParamList, 'SuccessScreen'>
+type TAuthScreenProps<T extends keyof AuthStackParamList> =
+    NativeStackScreenProps<AuthStackParamList, T>;
+
+export type PhoneNumberScreenStackProps = TAuthScreenProps<'PhoneNumber'>
+export type OTPCodeScreenStackProps = TAuthScreenProps<'OTPCode'>
+export type PasswordScreenStackProps = TAuthScreenProps<'Password'>
+export type ErrorScreenStackProps = TAuthScreenProps<'ErrorScreen'>
+export type SuccessScreenStackProps = TAuthScreenProps<'SuccessScreen'>
 
 

@@ -37,8 +37,8 @@ export const SuccessAuth = ({ navigateToNext }: Props) => {
         <Wrapper>
             <Content>
                 <IconSuccessAuth />
-                <Typography variant='subtitle'>Все готово</Typography>
-                <Typography variant='body15Regular' align='center'>Теперь вы можете использовать мобильное приложение Kode bank</Typography>
+                <Typography variant="subtitle">Все готово</Typography>
+                <Typography variant="body15Regular" align="center">Теперь вы можете использовать мобильное приложение Kode bank</Typography>
             </Content>
             <RetryButton onPress={navigateToNext}>Продолжить</RetryButton>
         </Wrapper>

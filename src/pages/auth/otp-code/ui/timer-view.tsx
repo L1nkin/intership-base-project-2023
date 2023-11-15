@@ -1,8 +1,7 @@
 import { styled } from '@shared/ui/theme';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Typography } from '@shared/ui/atoms';
-import { calculateEndTimer, calculateTimeLeft, convertSeconds } from '../../../../features/keyboard-template/lib';
-import { TimerInfo } from '../../../../features/keyboard-template/types';
+import { calculateEndTimer, calculateTimeLeft, convertSeconds } from '../lib';
 
 const TimerWrapper = styled.View`
     display: flex;
@@ -23,6 +22,11 @@ const TouchWrapper = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
 `
+
+export type TimerInfo = {
+    minutes: number
+    seconds: number
+}
 
 const timerInitial: TimerInfo = { minutes: 3, seconds: 0 }
 
@@ -55,8 +59,8 @@ export const TimerView = ({ onKeyPress }: Props) => {
         <TimerWrapper>
             {
                 isEnded
-                    ? <TouchWrapper activeOpacity={0.7} onPress={onPress}><Typography variant='caption1' align='center'>Выслать код повторно</Typography></TouchWrapper>
-                    : <TimerLabel variant='caption1' align='center'>Повторить через {timeLeft.minutes}:{convertSeconds(timeLeft.seconds)}</TimerLabel>
+                    ? <TouchWrapper activeOpacity={0.7} onPress={onPress}><Typography variant="caption1" align="center">Выслать код повторно</Typography></TouchWrapper>
+                    : <TimerLabel variant="caption1" align="center">Повторить через {timeLeft.minutes}:{convertSeconds(timeLeft.seconds)}</TimerLabel>
             }
         </TimerWrapper>
     )

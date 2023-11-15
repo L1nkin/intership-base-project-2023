@@ -8,7 +8,7 @@ import Animated from 'react-native-reanimated';
 import { TextInput } from 'react-native';
 import { getOtpCodeFx, savePhone } from '@entities/auth/model/store';
 import { useStore } from 'effector-react';
-import { useAnimation, usePhoneNumber } from './model';
+import { useKeyboardAnimation, usePhoneNumber } from './hooks';
 
 const Wrapper = styled.View`
   background: ${({ theme }) => theme.palette.background.primary};
@@ -45,7 +45,7 @@ type Props = {
 export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props) => {
   const { phoneNumber, isValidNumber, serverPhone, setIsValidNumber, onChangePhoneNumber, handlePhoneNumberFocus } = usePhoneNumber()
   const phoneRef = useRef<Partial<TextInput>>(null)
-  const { translateButtonStyle, translatePhoneViewStyle } = useAnimation()
+  const { translateButtonStyle, translatePhoneViewStyle } = useKeyboardAnimation()
   const isLoading = useStore(getOtpCodeFx.pending)
 
   const onPressIn = useCallback(() => {
@@ -54,19 +54,15 @@ export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props)
     }
   }, [])
 
-  const onPress = useCallback(() => {
+  const onPress = useCallback(async () => {
     if (phoneNumber.length === 18) {
-      (
-        async () => {
-          try {
-            savePhone(`+7${serverPhone}`)
-            await getOtpCodeFx(`+7${serverPhone}`)
-            navigateNext()
-          } catch (error) {
-            navigateToError()
-          }
-        }
-      )()
+      try {
+        savePhone(`+7${serverPhone}`)
+        await getOtpCodeFx(`+7${serverPhone}`)
+        navigateNext()
+      } catch (error) {
+        navigateToError()
+      }
       return
     }
     setIsValidNumber(false)
@@ -82,7 +78,7 @@ export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props)
         <PhoneInput
           isValid={isValidNumber}
           isLoading={isLoading}
-          placeholder='Телефон'
+          placeholder="Телефон"
           value={phoneNumber}
           onChangeText={onChangePhoneNumber}
           onFocus={() => handlePhoneNumberFocus(true)}

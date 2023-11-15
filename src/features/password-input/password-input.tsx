@@ -30,9 +30,9 @@ const InputText = styled(Input) <{ $isValid: boolean }>`
 
 type Props = {
     innerRef: Ref<Partial<TextInput>>
-}
+} & MaskInputProps
 
-export const PasswordInput = ({ innerRef, ...props }: Props & MaskInputProps) => {
+export const PasswordInput = ({ innerRef, ...props }: Props) => {
     const theme = useTheme()
     const [isSecure, setIsSecure] = useState(true)
 

@@ -20,7 +20,7 @@ const Wrapper = styled.View`
 
 const InputText = styled(Input) <{ $isValid: boolean }>`
     flex-grow: 1;
-    color: ${({ theme, $isValid }) => $isValid ? theme.palette.text.primary : theme.palette.indicator.error}
+    color: ${({ theme, $isValid }) => $isValid ? theme.palette.text.primary : theme.palette.indicator.error};
 `
 
 type Props = {

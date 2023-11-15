@@ -44,7 +44,8 @@ export const TimerView = ({ onKeyPress }: Props) => {
             clearTimeout(timeout)
             setIsEnded(true)
         }
-    }, [timeEnd, timeLeft])
+        return () => clearTimeout(timeout)
+    }, [timeLeft])
 
     const onPress = useCallback(() => {
         setTimeLeft(timerInitial)
@@ -52,8 +53,6 @@ export const TimerView = ({ onKeyPress }: Props) => {
         timeEnd.current = calculateEndTimer()
         onKeyPress()
     }, [onKeyPress])
-
-
 
     return (
         <TimerWrapper>

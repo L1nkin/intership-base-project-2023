@@ -28,18 +28,23 @@ export const useOtpCode = ({ validOtpCode, phoneNumber, navigateToError, navigat
             return
         }
         if (otpCode === validOtpCode.otpCode) {
-            getGuestTokenFx({
-                otpCode: validOtpCode.otpCode,
-                otpId: validOtpCode.otpId,
-                phone: phoneNumber
-            }).then(() => {
-                navigateNext()
-            }).catch(() => {
-                navigateToError()
-                invalidOtp()
-            })
+            const getGuestToken = async () => {
+                try {
+                    await getGuestTokenFx({
+                        otpCode: validOtpCode.otpCode,
+                        otpId: validOtpCode.otpId,
+                        phone: phoneNumber
+                    })
+                    navigateNext()
+                } catch (error) {
+                    navigateToError()
+                    invalidOtp()
+                }
+            }
+            getGuestToken()
             return
         }
+
         invalidOtp()
     }, [invalidOtp, navigateNext, navigateToError, navigateToStart, otpCode, phoneNumber, validOtpCode])
 

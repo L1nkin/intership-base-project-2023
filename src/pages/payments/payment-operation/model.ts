@@ -80,5 +80,5 @@ export const useCheckFields = ({ phoneNumber, additionalData, sumValue, navigate
         }
     }, [additionalData, navigateTo, mutate, phoneNumber.length, sumValue])
 
-    return { continueButtonPressed, isValidNumber, isValidSum }
+    return { continueButtonPressed, isValidNumber, isValidSum, setIsValidSum, setIsValidNumber }
 }

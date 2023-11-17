@@ -47,14 +47,22 @@ export const PaymentOperation = ({ service, navigateTo }: Props) => {
         continueButtonPressed,
         isValidNumber,
         isValidSum,
+        setIsValidNumber,
+        setIsValidSum
     } = useCheckFields({ phoneNumber, sumValue, additionalData: data, navigateTo })
 
     const phoneRef = useRef<Partial<TextInput>>(null)
     const sumRef = useRef<Partial<TextInput>>(null)
 
     const onChangeSum = useCallback((text: number) => {
+        setIsValidSum(true)
         setSumValue(text)
-    }, [])
+    }, [setIsValidSum])
+
+    const onChangePhone = useCallback((text: string) => {
+        setIsValidNumber(true)
+        onChangePhoneNumber(text)
+    }, [onChangePhoneNumber, setIsValidNumber])
 
     const onPressIn = useCallback(() => {
         if (phoneRef?.current?.blur && sumRef?.current?.blur) {
@@ -78,7 +86,7 @@ export const PaymentOperation = ({ service, navigateTo }: Props) => {
                             isValid={isValidNumber}
                             placeholder="Номер телефона"
                             keyboardType="number-pad"
-                            onChangeText={(masked) => onChangePhoneNumber(masked)}
+                            onChangeText={onChangePhone}
                             pressedClose={pressedClose}
                             onFocus={() => handlePhoneNumberFocus(true)}
                             onEndEditing={() => handlePhoneNumberFocus(false)}

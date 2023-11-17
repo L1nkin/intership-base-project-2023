@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@ui/theme'
-import { IconClose } from '@shared/ui/icons';
+import { IconClose, IconQuestion } from '@shared/ui/icons';
 import { Input } from '@shared/ui/atoms/input';
 import { Image, TextInput } from 'react-native';
 import { MaskInputProps } from 'react-native-mask-input';
@@ -25,7 +25,7 @@ const InputWrapper = styled.View`
 
 const InputText = styled(Input) <{ isValid: boolean }>`
     flex-grow: 1;
-    color: ${({ isValid, theme }) => isValid ? theme.palette.text.primary : theme.palette.indicator.error}
+    color: ${({ isValid, theme }) => isValid ? theme.palette.text.primary : theme.palette.indicator.error};
 `
 
 const PressedCloseIcon = styled.TouchableOpacity`
@@ -47,7 +47,10 @@ export const PhoneInput = ({ icon, innerRef, isValid = true, pressedClose, ...pr
     return (
         <Wrapper>
             <InputWrapper>
-                <Image source={{ uri: icon }} width={24} height={24} />
+                {icon
+                    ? <Image source={{ uri: icon }} width={24} height={24} />
+                    : <IconQuestion color={theme.palette.text.secondary} />
+                }
                 <InputText
                     isValid={isValid}
                     innerRef={innerRef}

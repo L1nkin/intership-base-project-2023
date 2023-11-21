@@ -96,7 +96,7 @@ export const AuthOTP = ({ navigateNext, navigateToError, navigateToStart }: Prop
         maximumLength={maximumCodeLength}
       />
       {isValidCode ? undefined : <ErrorTryCountLabel align="center" variant="caption2">Неверный код. Осталось {6 - sendingTryCount} попытки</ErrorTryCountLabel>}
-      <KeyboardTemplate onKeyPressed={onKeyPressed} leftBottomView={<TimerView onKeyPress={onTimerPressed} />} />
+      <KeyboardTemplate isShowing={true} onKeyPressed={onKeyPressed} leftBottomView={<TimerView onKeyPress={onTimerPressed} />} />
     </Wrapper>
   )
 }

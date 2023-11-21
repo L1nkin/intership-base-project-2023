@@ -8,7 +8,10 @@ import Animated from 'react-native-reanimated';
 import { TextInput } from 'react-native';
 import { getOtpCodeFx, savePhone } from '@entities/auth/model/store';
 import { useStore } from 'effector-react';
+import { KeyboardTemplate } from '@shared/ui/templates';
+import { TKeyboardButtonType } from '@shared/ui/templates/keyboard-template/types';
 import { useKeyboardAnimation, usePhoneNumber } from './hooks';
+import { CancelInputView } from './ui/';
 
 const Wrapper = styled.View`
   background: ${({ theme }) => theme.palette.background.primary};
@@ -43,9 +46,9 @@ type Props = {
 }
 
 export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props) => {
-  const { phoneNumber, isValidNumber, serverPhone, setIsValidNumber, onChangePhoneNumber, handlePhoneNumberFocus } = usePhoneNumber()
+  const { phoneNumber, isValidNumber, isFocus, setPhoneNumber, setIsFocus, setIsValidNumber, handlePhoneNumberFocus } = usePhoneNumber()
   const phoneRef = useRef<Partial<TextInput>>(null)
-  const { translateButtonStyle, translatePhoneViewStyle } = useKeyboardAnimation()
+  const { showingKeyboardStyle, translatePhoneViewStyle } = useKeyboardAnimation(isFocus)
   const isLoading = useStore(getOtpCodeFx.pending)
 
   const onPressIn = useCallback(() => {
@@ -55,10 +58,10 @@ export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props)
   }, [])
 
   const onPress = useCallback(async () => {
-    if (phoneNumber.length === 18) {
+    if (phoneNumber.length === 12) {
       try {
-        savePhone(`+7${serverPhone}`)
-        await getOtpCodeFx(`+7${serverPhone}`)
+        savePhone(phoneNumber)
+        await getOtpCodeFx(phoneNumber)
         navigateNext()
       } catch (error) {
         navigateToError()
@@ -67,8 +70,28 @@ export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props)
     }
     setIsValidNumber(false)
     createSnack({ message: 'Пожалуйста, убедитесь, что вы правильно ввели номер телефона', duration: 3000 })
-  }, [navigateNext, navigateToError, phoneNumber.length, serverPhone, setIsValidNumber])
+  }, [navigateNext, navigateToError, phoneNumber, setIsValidNumber])
 
+  const onKeyPressed = useCallback((type: TKeyboardButtonType, value?: number) => {
+    setIsValidNumber(true)
+    switch (type) {
+      case 'number':
+        if (phoneNumber.length < 12) {
+          setPhoneNumber((prev) => prev + value)
+        }
+        break;
+
+      case 'remove':
+        setPhoneNumber((prev) => prev.slice(0, -1))
+        break;
+    }
+  }, [phoneNumber.length, setIsValidNumber, setPhoneNumber])
+
+  const cancelOnPress = useCallback(() => {
+    setPhoneNumber('')
+    setIsFocus(false)
+    onPressIn()
+  }, [onPressIn, setIsFocus, setPhoneNumber])
   return (
     <Wrapper>
       <PhoneLogoView style={translatePhoneViewStyle}>
@@ -80,17 +103,17 @@ export const AuthPhoneNumberWriting = ({ navigateNext, navigateToError }: Props)
           isLoading={isLoading}
           placeholder="Телефон"
           value={phoneNumber}
-          onChangeText={onChangePhoneNumber}
           onFocus={() => handlePhoneNumberFocus(true)}
           onEndEditing={() => handlePhoneNumberFocus(false)}
           mask={phoneMask}
-          keyboardType="number-pad"
           innerRef={phoneRef}
+          showSoftInputOnFocus={false}
         />
       </PhoneLogoView>
-      <LoginButtonView style={translateButtonStyle}>
+      <LoginButtonView style={showingKeyboardStyle}>
         <PrimaryButton onPress={onPress} onPressIn={onPressIn} >Отправить</PrimaryButton>
       </LoginButtonView>
+      <KeyboardTemplate leftBottomView={<CancelInputView onPress={cancelOnPress} />} isShowing={isFocus} onKeyPressed={onKeyPressed} />
     </Wrapper>
   )
 }

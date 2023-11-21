@@ -11,7 +11,7 @@ import { useStore } from 'effector-react';
 import { KeyboardTemplate } from '@shared/ui/templates';
 import { TKeyboardButtonType } from '@shared/ui/templates/keyboard-template/types';
 import { useKeyboardAnimation, usePhoneNumber } from './hooks';
-import { CancelInputView } from './ui/';
+import { CancelInputView } from './ui/cancel-input-view';
 
 const Wrapper = styled.View`
   background: ${({ theme }) => theme.palette.background.primary};

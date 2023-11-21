@@ -7,7 +7,7 @@ import { ConfirmBody, EnterBody } from "./types"
 export const $guestTokenStore = createStore('')
 export const $refreshToken = createStore('')
 export const $accessToken = createStore('')
-export const $authStorage = createStore(false)
+export const $isAuth = createStore(false)
 
 export const setAuth = createEvent<boolean>()
 
@@ -24,7 +24,7 @@ export const getTokensFx = createEffect(async ({ guestToken, password }: EnterBo
 $guestTokenStore.on(getGuestTokenFx.doneData, (_, payload) => payload)
 $refreshToken.on(getTokensFx.doneData, (_, payload) => payload.refreshToken)
 $accessToken.on(getTokensFx.doneData, (_, payload) => payload.accessToken)
-$authStorage.on(setAuth, (_, payload) => payload)
+$isAuth.on(setAuth, (_, payload) => payload)
 
 persist({
     store: $refreshToken,
@@ -42,4 +42,10 @@ persist({
     store: $guestTokenStore,
     key: 'questToken',
     adapter: storageAdapter,
+})
+
+persist({
+    store: $isAuth,
+    key: 'isAuth',
+    adapter: storageAdapter
 })

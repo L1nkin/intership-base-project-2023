@@ -4,17 +4,16 @@ const phoneNumberPrefix = '+7'
 
 export const usePhoneNumber = () => {
     const [phoneNumber, setPhoneNumber] = useState('')
-    const [serverPhone, setServerPhone] = useState('')
     const [isValidNumber, setIsValidNumber] = useState(true)
-
-    const onChangePhoneNumber = useCallback((phone: string, unmaskedPhone: string) => {
-        setServerPhone(unmaskedPhone)
-        setIsValidNumber(true)
-        setPhoneNumber(phone)
-    }, [])
+    const [isFocus, setIsFocus] = useState(false)
 
 
     const handlePhoneNumberFocus = useCallback((isFocus: boolean) => {
+        if (isFocus) {
+            setIsFocus(true)
+        } else {
+            setIsFocus(false)
+        }
         if (isFocus && !phoneNumber.includes(phoneNumberPrefix)) {
             setPhoneNumber(phoneNumberPrefix)
             return
@@ -25,5 +24,5 @@ export const usePhoneNumber = () => {
         }
     }, [phoneNumber])
 
-    return { phoneNumber, isValidNumber, serverPhone, setIsValidNumber, onChangePhoneNumber, handlePhoneNumberFocus }
+    return { phoneNumber, isValidNumber, isFocus, setPhoneNumber, setIsFocus, setIsValidNumber, handlePhoneNumberFocus }
 }

@@ -28,14 +28,14 @@ const CardInfoView = styled.View`
 export const CardStub = () => {
     return (
         <Wrapper>
-            <HeaderTypography variant='body15Semibold'>Карта для оплаты</HeaderTypography>
+            <HeaderTypography variant="body15Semibold">Карта для оплаты</HeaderTypography>
             <CardView>
-                <IconCardWhite color='#fff' />
+                <IconCardWhite color="#fff" />
                 <CardInfoView>
-                    <Typography variant='body15Regular' >Карта зарплатная</Typography>
-                    <Typography variant='caption1' >457 334,00 ₽</Typography>
+                    <Typography variant="body15Regular" >Карта зарплатная</Typography>
+                    <Typography variant="caption1" >457 334,00 ₽</Typography>
                 </CardInfoView>
-                <IconChevronDown color='#706D76' />
+                <IconChevronDown color="#706D76" />
             </CardView>
         </Wrapper>
     )

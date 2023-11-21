@@ -1,15 +1,18 @@
 import React, { ReactNode } from 'react';
 import { styled } from '@shared/ui/theme';
+import Animated from 'react-native-reanimated';
+import { useKeyboardShowing } from '@shared/hooks';
 import { TKeyButtonPressed, TKeyboardButton, } from './types';
 import { ElementKeyView } from './keyboard-key-element';
 
-const StyledSeparatedElements = styled.View`
+const StyledSeparatedElements = styled(Animated.View)`
     display: flex;
     gap: 20px;
     position: absolute;
-    bottom: 20px;
+    bottom: -280px;
     left: 0;
     right: 0;
+    height: 280px;
 `
 
 const ElementsRow = styled.View`
@@ -29,13 +32,15 @@ const valueListMock: TKeyboardButton[][] = [
 
 type Props = {
     leftBottomView: ReactNode
+    isShowing: boolean
     onKeyPressed: TKeyButtonPressed
 }
 
-export const KeyboardTemplate = ({ leftBottomView, onKeyPressed }: Props) => {
+export const KeyboardTemplate = ({ leftBottomView, isShowing, onKeyPressed }: Props) => {
+    const { showingKeyboardStyle } = useKeyboardShowing(isShowing)
 
     return (
-        <StyledSeparatedElements>
+        <StyledSeparatedElements style={showingKeyboardStyle} >
             {valueListMock.map((row, index) => {
                 return (
                     <ElementsRow key={index}>

@@ -1,23 +1,24 @@
-import { useAnimatedKeyboard, useAnimatedStyle } from "react-native-reanimated"
+import { useKeyboardShowing } from "@shared/hooks";
+import { useEffect } from "react";
+import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
 
+export const useKeyboardAnimation = (isFocus: boolean) => {
+    const phoneView = useSharedValue(0)
+    const { showingKeyboardStyle } = useKeyboardShowing(isFocus)
 
-
-export const useKeyboardAnimation = () => {
-    const keyboard = useAnimatedKeyboard()
-
-    const translateButtonStyle = useAnimatedStyle(() => {
-        return {
-            transform: [{ translateY: -keyboard.height.value }],
-        };
-    });
     const translatePhoneViewStyle = useAnimatedStyle(() => {
-        let translateY = 0
-        if (keyboard.state.value === 1 || keyboard.state.value === 2) translateY = -50
-
         return {
-            transform: [{ translateY: translateY }],
+            transform: [{ translateY: -phoneView.value }],
         }
     })
 
-    return { translateButtonStyle, translatePhoneViewStyle }
+    useEffect(() => {
+        if (isFocus) {
+            phoneView.value = withTiming(50)
+            return
+        }
+        phoneView.value = withTiming(0)
+    }, [isFocus, phoneView])
+
+    return { showingKeyboardStyle, translatePhoneViewStyle }
 }

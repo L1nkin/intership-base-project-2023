@@ -1,4 +1,6 @@
+import { useTheme } from '@shared/hooks'
 import { Typography } from '@shared/ui/atoms'
+import { IconQuestion } from '@shared/ui/icons'
 import { styled } from '@shared/ui/theme'
 import React, { memo, useCallback } from 'react'
 import { Image } from 'react-native'
@@ -30,13 +32,17 @@ const IconView = styled.View`
 `
 
 export const FlatListItemWitIcon = memo(function FlatListItemWitIcon({ id, name, icon, onPress }: Props) {
+    const theme = useTheme()
     const onPressItem = useCallback(() => {
         onPress(id)
     }, [id, onPress])
     return (
         <Wrapper onPress={onPressItem}>
             <IconView>
-                <Image width={24} height={24} source={{ uri: icon }} />
+                {
+                    icon ? <Image width={24} height={24} source={{ uri: icon }} />
+                        : <IconQuestion color={theme.palette.text.secondary} />
+                }
             </IconView>
             <Typography variant="body15Regular">{name}</Typography>
         </Wrapper>
